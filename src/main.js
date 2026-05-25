@@ -14,6 +14,14 @@ document.addEventListener('DOMContentLoaded', () => {
   initGitHubHabitGrid();
   initHorizontalSlideController();
   
+  // Cyber Aurora 2.0 premium initializations
+  initMatrixController();
+  initMatrixRain();
+  initWebAudioSynth();
+  initSynthwavePlayer();
+  initEnhancedTilt();
+  initHackerTypingEffect();
+
   // Feather Icons
   if (window.feather) {
     window.feather.replace();
@@ -410,10 +418,23 @@ function initHorizontalSlideController() {
     slidesElements.forEach((el, index) => {
       if (index === currentSlideIdx) {
         el.classList.add('active-slide');
+        
+        // Hacker typing effect on slide header title
+        const headerTitle = el.querySelector('.slide-header h2');
+        if (headerTitle) {
+          const originalText = headerTitle.dataset.original || headerTitle.textContent;
+          if (!headerTitle.dataset.original) {
+            headerTitle.dataset.original = originalText;
+          }
+          typeHackerTitle(headerTitle, originalText);
+        }
       } else {
         el.classList.remove('active-slide');
       }
     });
+    
+    // Play sci-fi slide sweep audio SFX
+    playSynthSound('transition');
 
     // Actualizar links activos del sidebar
     sidebarLinks.forEach(link => {
@@ -470,4 +491,409 @@ function initHorizontalSlideController() {
   window.addEventListener('resize', () => {
     navigateToSlide(currentSlideIdx);
   });
+}
+
+/* ==========================================================================
+   8. MEJORAS CYBER AURORA 2.0 - LÓGICA DE CONTROL PREMIUM
+   ========================================================================== */
+
+// --- 8A. SINTETIZADOR WEB AUDIO API PROCEDIMENTAL ---
+let audioCtx = null;
+let sfxEnabled = true;
+
+window.playSynthSound = function(type) {
+  if (!sfxEnabled) return;
+  try {
+    if (!audioCtx) {
+      audioCtx = new (window.AudioContext || window.webkitAudioContext)();
+    }
+    if (audioCtx.state === 'suspended') {
+      audioCtx.resume();
+    }
+
+    const osc = audioCtx.createOscillator();
+    const gain = audioCtx.createGain();
+    
+    osc.connect(gain);
+    gain.connect(audioCtx.destination);
+    
+    const now = audioCtx.currentTime;
+    
+    if (type === 'hover') {
+      // Soft high pitch blip
+      osc.type = 'sine';
+      osc.frequency.setValueAtTime(850, now);
+      osc.frequency.exponentialRampToValueAtTime(1250, now + 0.06);
+      gain.gain.setValueAtTime(0.015, now);
+      gain.gain.exponentialRampToValueAtTime(0.0001, now + 0.06);
+      osc.start(now);
+      osc.stop(now + 0.06);
+    } else if (type === 'click') {
+      // Tech double chirp
+      osc.type = 'triangle';
+      osc.frequency.setValueAtTime(550, now);
+      osc.frequency.setValueAtTime(850, now + 0.03);
+      gain.gain.setValueAtTime(0.06, now);
+      gain.gain.setValueAtTime(0.03, now + 0.03);
+      gain.gain.exponentialRampToValueAtTime(0.0001, now + 0.1);
+      osc.start(now);
+      osc.stop(now + 0.1);
+    } else if (type === 'transition') {
+      // Sci-fi modular sweep/whoosh
+      osc.type = 'sine';
+      osc.frequency.setValueAtTime(140, now);
+      osc.frequency.exponentialRampToValueAtTime(500, now + 0.4);
+      gain.gain.setValueAtTime(0.04, now);
+      gain.gain.exponentialRampToValueAtTime(0.0001, now + 0.4);
+      osc.start(now);
+      osc.stop(now + 0.4);
+    }
+  } catch (err) {
+    console.warn("Web Audio API blocked or not supported by browser", err);
+  }
+};
+
+function initWebAudioSynth() {
+  const sfxToggle = document.getElementById('sfxToggle');
+  if (sfxToggle) {
+    sfxToggle.checked = sfxEnabled;
+    sfxToggle.addEventListener('change', (e) => {
+      sfxEnabled = e.target.checked;
+      playSynthSound('click');
+    });
+  }
+
+  // Delegar eventos hover/click
+  document.addEventListener('mouseover', (e) => {
+    if (e.target.closest('a, button, .foda-panel, .timeline-horiz-item, .habit-cube, .sci-slider-box, .theme-select-btn, .bg-mode-btn, .slider-input')) {
+      playSynthSound('hover');
+    }
+  });
+
+  document.addEventListener('click', (e) => {
+    if (e.target.closest('a, button, .timeline-horiz-item, .habit-cube, .theme-select-btn, .bg-mode-btn')) {
+      playSynthSound('click');
+    }
+  });
+}
+
+// --- 8B. EFECTO MATRIX RAIN EN CANVAS ---
+let matrixInterval = null;
+
+function initMatrixRain() {
+  const canvas = document.getElementById('matrixCanvas');
+  if (!canvas) return;
+  const ctx = canvas.getContext('2d');
+  
+  let width = (canvas.width = window.innerWidth);
+  let height = (canvas.height = window.innerHeight);
+  
+  const columns = Math.floor(width / 20);
+  const yPositions = Array(columns).fill(0);
+  const alphabet = "ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789$#@%&*()[]{}<>+=/\\^~";
+  
+  function drawMatrix() {
+    let color = "#22d3ee"; // cian default
+    if (document.body.classList.contains('theme-flare')) color = "#f59e0b";
+    else if (document.body.classList.contains('theme-nebula')) color = "#a855f7";
+    else if (document.body.classList.contains('theme-tokyo')) color = "#ec4899";
+
+    ctx.fillStyle = "rgba(3, 7, 11, 0.08)";
+    ctx.fillRect(0, 0, width, height);
+    
+    ctx.font = "15px monospace";
+    
+    for (let i = 0; i < yPositions.length; i++) {
+      const text = alphabet.charAt(Math.floor(Math.random() * alphabet.length));
+      const x = i * 20;
+      const y = yPositions[i];
+      
+      // Caracter frontal brillante
+      ctx.fillStyle = "#ffffff";
+      ctx.fillText(text, x, y);
+      
+      // Cola de neón
+      ctx.fillStyle = color;
+      ctx.fillText(text, x, y - 15);
+      
+      if (y > 100 + Math.random() * 10000) {
+        yPositions[i] = 0;
+      } else {
+        yPositions[i] += 15;
+      }
+    }
+  }
+  
+  window.addEventListener('resize', () => {
+    width = canvas.width = window.innerWidth;
+    height = canvas.height = window.innerHeight;
+  });
+
+  function startMatrix() {
+    if (matrixInterval) clearInterval(matrixInterval);
+    ctx.clearRect(0, 0, width, height);
+    matrixInterval = setInterval(drawMatrix, 50);
+  }
+
+  function stopMatrix() {
+    if (matrixInterval) {
+      clearInterval(matrixInterval);
+      matrixInterval = null;
+    }
+  }
+
+  window.startMatrixRain = startMatrix;
+  window.stopMatrixRain = stopMatrix;
+}
+
+// --- 8C. CONTROLLER DE MATRIZ Y CAMBIO DE TEMAS DE NEÓN ---
+function initMatrixController() {
+  const toggle = document.getElementById('matrixCtrlToggle');
+  const sidebar = document.getElementById('matrixSidebar');
+  const closeBtn = document.getElementById('matrixSidebarClose');
+  
+  if (toggle && sidebar && closeBtn) {
+    toggle.addEventListener('click', () => {
+      sidebar.classList.toggle('open');
+      playSynthSound('click');
+    });
+    
+    closeBtn.addEventListener('click', () => {
+      sidebar.classList.remove('open');
+      playSynthSound('click');
+    });
+
+    document.addEventListener('click', (e) => {
+      if (!sidebar.contains(e.target) && !toggle.contains(e.target)) {
+        sidebar.classList.remove('open');
+      }
+    });
+  }
+
+  // Selección de Temas Neón
+  const themeBtns = document.querySelectorAll('.theme-select-btn');
+  const savedTheme = localStorage.getItem('matrix-theme') || 'aurora';
+  
+  function applyTheme(themeName) {
+    document.body.classList.remove('theme-flare', 'theme-nebula', 'theme-tokyo');
+    if (themeName !== 'aurora') {
+      document.body.classList.add(`theme-${themeName}`);
+    }
+    
+    themeBtns.forEach(btn => {
+      if (btn.dataset.theme === themeName) {
+        btn.classList.add('active');
+      } else {
+        btn.classList.remove('active');
+      }
+    });
+    
+    localStorage.setItem('matrix-theme', themeName);
+  }
+
+  themeBtns.forEach(btn => {
+    btn.addEventListener('click', () => {
+      applyTheme(btn.dataset.theme);
+      playSynthSound('click');
+    });
+  });
+
+  applyTheme(savedTheme);
+
+  // Selección de Modo de Fondo
+  const bgBtns = document.querySelectorAll('.bg-mode-btn');
+  const savedBg = localStorage.getItem('matrix-bg') || 'aurora-drift';
+
+  function applyBgMode(bgMode) {
+    bgBtns.forEach(btn => {
+      if (btn.dataset.bg === bgMode) {
+        btn.classList.add('active');
+      } else {
+        btn.classList.remove('active');
+      }
+    });
+
+    if (bgMode === 'matrix-rain') {
+      document.body.classList.add('mode-matrix-rain');
+      if (window.startMatrixRain) window.startMatrixRain();
+    } else {
+      document.body.classList.remove('mode-matrix-rain');
+      if (window.stopMatrixRain) window.stopMatrixRain();
+    }
+
+    localStorage.setItem('matrix-bg', bgMode);
+  }
+
+  bgBtns.forEach(btn => {
+    btn.addEventListener('click', () => {
+      applyBgMode(btn.dataset.bg);
+      playSynthSound('click');
+    });
+  });
+
+  setTimeout(() => {
+    applyBgMode(savedBg);
+  }, 100);
+}
+
+// --- 8D. REPRODUCTOR SYNTHWAVE COCKPIT Y SINTETIZADOR DE MÚSICA DE FONDO ---
+let synthPlayerCtx = null;
+let synthPlayerNodes = [];
+let isPlayingProcedural = false;
+
+function playProceduralMusic() {
+  if (isPlayingProcedural) return;
+  isPlayingProcedural = true;
+  
+  try {
+    synthPlayerCtx = new (window.AudioContext || window.webkitAudioContext)();
+    const destination = synthPlayerCtx.destination;
+    const now = synthPlayerCtx.currentTime;
+    
+    // Tríada menor cósmica para ambiente cyberpunk relajante: C3, G3, C4, Eb4
+    const freqs = [130.81, 196.00, 261.63, 311.13];
+    
+    const masterGain = synthPlayerCtx.createGain();
+    masterGain.gain.setValueAtTime(0, now);
+    masterGain.gain.linearRampToValueAtTime(0.08, now + 2); // gradual fade in
+    
+    // Filtro de paso bajo
+    const filter = synthPlayerCtx.createBiquadFilter();
+    filter.type = 'lowpass';
+    filter.frequency.setValueAtTime(320, now);
+    
+    // LFO para barridos lentos de filtro espacial
+    const lfo = synthPlayerCtx.createOscillator();
+    lfo.type = 'sine';
+    lfo.frequency.value = 0.12; 
+    
+    const lfoGain = synthPlayerCtx.createGain();
+    lfoGain.gain.value = 180; 
+    
+    lfo.connect(lfoGain);
+    lfoGain.connect(filter.frequency);
+    lfo.start(now);
+    
+    // Generar osciladores combinados sawtooth y triangle
+    freqs.forEach((freq, idx) => {
+      const osc = synthPlayerCtx.createOscillator();
+      osc.type = (idx % 2 === 0) ? 'sawtooth' : 'triangle';
+      osc.frequency.value = freq;
+      
+      const oscGain = synthPlayerCtx.createGain();
+      oscGain.gain.value = 0.25;
+      
+      osc.connect(oscGain);
+      oscGain.connect(filter);
+      
+      osc.start(now);
+      synthPlayerNodes.push(osc);
+    });
+    
+    // Efecto de eco / Delay espacial
+    const delay = synthPlayerCtx.createDelay();
+    delay.delayTime.value = 0.55;
+    
+    const delayFeedback = synthPlayerCtx.createGain();
+    delayFeedback.gain.value = 0.45;
+    
+    filter.connect(masterGain);
+    masterGain.connect(destination);
+    
+    filter.connect(delay);
+    delay.connect(delayFeedback);
+    delayFeedback.connect(delay); // bucle de retroalimentación
+    delayFeedback.connect(masterGain);
+    
+    synthPlayerNodes.push(lfo, filter, masterGain, delay, delayFeedback);
+  } catch (e) {
+    console.warn("AudioContext block for procedural ambient generation", e);
+  }
+}
+
+function stopProceduralMusic() {
+  if (!isPlayingProcedural) return;
+  isPlayingProcedural = false;
+  
+  if (synthPlayerNodes.length > 0) {
+    synthPlayerNodes.forEach(node => {
+      try {
+        node.stop();
+      } catch (e) {}
+    });
+    synthPlayerNodes = [];
+  }
+  if (synthPlayerCtx) {
+    synthPlayerCtx.close();
+    synthPlayerCtx = null;
+  }
+}
+
+function initSynthwavePlayer() {
+  const player = document.querySelector('.synthwave-player');
+  const playBtn = document.getElementById('playPauseBtn');
+  const trackName = document.getElementById('trackName');
+  
+  if (!player || !playBtn || !trackName) return;
+  
+  trackName.textContent = "Live_Synth_Pad.sys";
+  
+  playBtn.addEventListener('click', () => {
+    if (player.classList.contains('playing')) {
+      player.classList.remove('playing');
+      playBtn.innerHTML = '<i data-feather="play" style="width: 14px; height: 14px;"></i>';
+      if (window.feather) window.feather.replace();
+      stopProceduralMusic();
+    } else {
+      player.classList.add('playing');
+      playBtn.innerHTML = '<i data-feather="pause" style="width: 14px; height: 14px;"></i>';
+      if (window.feather) window.feather.replace();
+      playProceduralMusic();
+    }
+  });
+}
+
+// --- 8E. EFECTO GLITCH MATRIX EN TEXTOS DE ENCABEZADO ---
+window.typeHackerTitle = function(element, text) {
+  let iterations = 0;
+  const letters = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789@#%&";
+  clearInterval(element.typeInterval);
+  
+  element.typeInterval = setInterval(() => {
+    element.innerHTML = text.split("")
+      .map((char, index) => {
+        if (index < iterations) {
+          return text[index];
+        }
+        if (char === " ") return " ";
+        return letters[Math.floor(Math.random() * letters.length)];
+      })
+      .join("");
+      
+    if (iterations >= text.length) {
+      clearInterval(element.typeInterval);
+    }
+    iterations += 1/3;
+  }, 25);
+};
+
+function initHackerTypingEffect() {
+  const welcomeTitle = document.querySelector('.welcome-title');
+  if (welcomeTitle) {
+    welcomeTitle.dataset.original = "Yankarlo Morán";
+    typeHackerTitle(welcomeTitle, "Yankarlo Morán");
+  }
+}
+
+// --- 8F. PERSPECTIVA 3D TILT EN TODOS LOS TECH PANELS ---
+function initEnhancedTilt() {
+  if (window.VanillaTilt) {
+    window.VanillaTilt.init(document.querySelectorAll(".tech-panel"), {
+      max: 8,
+      speed: 300,
+      glare: true,
+      "max-glare": 0.12,
+      perspective: 1000
+    });
+  }
 }

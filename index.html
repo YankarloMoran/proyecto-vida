@@ -22,6 +22,9 @@
       <div class="particles-container" id="particlesContainer"></div>
     </div>
 
+    <!-- Canvas para la lluvia de código Matrix -->
+    <canvas id="matrixCanvas" class="matrix-canvas"></canvas>
+
     <!-- BARRA DE NAVEGACIÓN LATERAL DE CRISTAL (LEFT SIDEBAR) -->
     <aside class="sidebar-nav">
       <div class="sidebar-logo">
@@ -69,6 +72,30 @@
           </li>
         </ul>
       </nav>
+      <!-- SYNTHWAVE COCKPIT PLAYER -->
+      <div class="synthwave-player">
+        <div class="player-title">
+          <i data-feather="music" class="music-icon anim-spin" style="width: 14px; height: 14px;"></i>
+          <span>COCKPIT AUDIO</span>
+        </div>
+        <div class="equalizer-container" id="equalizer">
+          <div class="eq-bar"></div>
+          <div class="eq-bar"></div>
+          <div class="eq-bar"></div>
+          <div class="eq-bar"></div>
+          <div class="eq-bar"></div>
+          <div class="eq-bar"></div>
+          <div class="eq-bar"></div>
+          <div class="eq-bar"></div>
+        </div>
+        <div class="player-controls">
+          <button class="player-btn" id="playPauseBtn" aria-label="Reproducir/Pausar Música">
+            <i data-feather="play" style="width: 14px; height: 14px;"></i>
+          </button>
+          <span class="track-name" id="trackName">Synthwave_Ambient</span>
+        </div>
+      </div>
+
       <div class="sidebar-footer">
         <p>SYSTEM // ACTIVE</p>
         <p style="margin-top: 0.2rem; color: rgba(255,255,255,0.06);">REV. 2026 // YM</p>
@@ -230,6 +257,73 @@
     <script src="https://cdn.jsdelivr.net/npm/vanilla-tilt@1.7.2/dist/vanilla-tilt.min.js"></script>
     <!-- Feather Icons -->
     <script src="https://cdn.jsdelivr.net/npm/feather-icons/dist/feather.min.js"></script>
+
+    <!-- PANEL DE CONTROL MATRICIAL (MATRIX CONTROLLER) -->
+    <button class="matrix-ctrl-toggle" id="matrixCtrlToggle" aria-label="Abrir panel de control">
+      <i data-feather="sliders"></i>
+    </button>
+
+    <div class="matrix-sidebar" id="matrixSidebar">
+      <button class="matrix-sidebar-close" id="matrixSidebarClose">
+        <i data-feather="x"></i>
+      </button>
+      
+      <div class="matrix-sidebar-content">
+        <h3 class="matrix-title">MATRIX CONTROLLER</h3>
+        <p class="matrix-subtitle">Personalización del Sistema Vital</p>
+        
+        <div class="matrix-group">
+          <label class="matrix-label">Esquema de Color Neón</label>
+          <div class="theme-grid">
+            <button class="theme-select-btn active" data-theme="aurora" style="--btn-color: #22d3ee;">
+              <span>Aurora</span>
+            </button>
+            <button class="theme-select-btn" data-theme="flare" style="--btn-color: #f59e0b;">
+              <span>Flare</span>
+            </button>
+            <button class="theme-select-btn" data-theme="nebula" style="--btn-color: #a855f7;">
+              <span>Nebula</span>
+            </button>
+            <button class="theme-select-btn" data-theme="tokyo" style="--btn-color: #ec4899;">
+              <span>Tokyo</span>
+            </button>
+          </div>
+        </div>
+
+        <div class="matrix-group">
+          <label class="matrix-label">Fondo Holográfico</label>
+          <div class="bg-mode-grid">
+            <button class="bg-mode-btn active" data-bg="aurora-drift">
+              <i data-feather="wind"></i> Aurora Drift
+            </button>
+            <button class="bg-mode-btn" data-bg="matrix-rain">
+              <i data-feather="activity"></i> Matrix Code
+            </button>
+          </div>
+        </div>
+
+        <div class="matrix-group">
+          <div class="toggle-control">
+            <span class="matrix-label" style="margin-bottom: 0;">Efectos de Sonido SFX</span>
+            <label class="switch">
+              <input type="checkbox" id="sfxToggle" checked>
+              <span class="slider-round"></span>
+            </label>
+          </div>
+        </div>
+
+        <div class="matrix-system-status">
+          <div class="status-row">
+            <span>CORE_STATUS:</span>
+            <span style="color: var(--text-neon-emerald);">OPERATIONAL // 100%</span>
+          </div>
+          <div class="status-row">
+            <span>INTERFACE_MODE:</span>
+            <span style="color: var(--text-neon-cyan);">CYBER_AURORA_2.0</span>
+          </div>
+        </div>
+      </div>
+    </div>
 
     <!-- Lógica de Control Horizontal -->
     <script type="module" src="/src/main.js"></script>
