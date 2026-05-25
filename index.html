@@ -4,7 +4,7 @@
     <meta charset="UTF-8" />
     <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Yankarlo Morán - Proyecto de Vida (Cyber Aurora)</title>
+    <title>Gabriel Angel - Proyecto de Vida (Cyber Aurora)</title>
     <!-- Hoja de Estilo Principal -->
     <link rel="stylesheet" href="/src/style.css" />
   </head>
@@ -72,27 +72,29 @@
           </li>
         </ul>
       </nav>
-      <!-- SYNTHWAVE COCKPIT PLAYER -->
-      <div class="synthwave-player">
-        <div class="player-title">
-          <i data-feather="music" class="music-icon anim-spin" style="width: 14px; height: 14px;"></i>
-          <span>COCKPIT AUDIO</span>
+      <!-- CYBER HUD SYSTEM DIAGNOSTIC PANEL -->
+      <div class="cyber-hud">
+        <div class="hud-header">
+          <i data-feather="cpu" class="hud-icon anim-pulse" style="width: 14px; height: 14px;"></i>
+          <span>SYS_DIAGNOSTICS</span>
         </div>
-        <div class="equalizer-container" id="equalizer">
-          <div class="eq-bar"></div>
-          <div class="eq-bar"></div>
-          <div class="eq-bar"></div>
-          <div class="eq-bar"></div>
-          <div class="eq-bar"></div>
-          <div class="eq-bar"></div>
-          <div class="eq-bar"></div>
-          <div class="eq-bar"></div>
-        </div>
-        <div class="player-controls">
-          <button class="player-btn" id="playPauseBtn" aria-label="Reproducir/Pausar Música">
-            <i data-feather="play" style="width: 14px; height: 14px;"></i>
-          </button>
-          <span class="track-name" id="trackName">Synthwave_Ambient</span>
+        <div class="hud-grid">
+          <div class="hud-item">
+            <span class="hud-label">CORE_TEMP</span>
+            <span class="hud-value" id="hudCoreTemp">38°C</span>
+          </div>
+          <div class="hud-item">
+            <span class="hud-label">GRID_LATENCY</span>
+            <span class="hud-value" id="hudLatency">14ms</span>
+          </div>
+          <div class="hud-item">
+            <span class="hud-label">MEM_LOAD</span>
+            <span class="hud-value" id="hudMemLoad">34%</span>
+          </div>
+          <div class="hud-item">
+            <span class="hud-label">PROJ_STATUS</span>
+            <span class="hud-value text-neon-emerald" style="font-weight: 700;">ACTIVE</span>
+          </div>
         </div>
       </div>
 
@@ -110,7 +112,7 @@
         <div class="welcome-grid">
           <div class="hero-content" data-aos="fade-right">
             <span class="tech-tag" style="color: var(--text-neon-emerald);">Life Roadmap //</span>
-            <h1 class="welcome-title"><span class="text-gradient" id="heroTitle">Yankarlo Morán</span></h1>
+            <h1 class="welcome-title"><span class="text-gradient" id="heroTitle">Gabriel Angel</span></h1>
             <p class="welcome-sub" id="heroSubtitle">Mi Proyecto de Vida</p>
             <p class="welcome-tagline" id="heroTagline">El éxito no se mide por lo que logras, sino por la persona en la que te conviertes en el proceso.</p>
             <p style="color: var(--text-dim); margin-top: 1rem;" id="heroIntro"></p>
@@ -137,7 +139,7 @@
                 <circle cx="12" cy="7" r="4"></circle>
               </svg>
             </div>
-            <h3 class="text-gradient" id="profileName" style="font-size: 1.5rem;">Yankarlo Morán</h3>
+             <h3 class="text-gradient" id="profileName" style="font-size: 1.5rem;">Gabriel Angel</h3>
             <p class="welcome-sub" style="font-size: 0.9rem; margin-top: 0.2rem;">Estudiante & Desarrollador</p>
             <p style="font-size: 0.85rem; color: var(--text-dim); margin-top: 1rem;" id="profileIntro">
               Apasionado por el aprendizaje continuo, la creación de soluciones interactivas y el crecimiento integral.
@@ -239,15 +241,15 @@
 
     <!-- SLIDE FOOTER CONTROLS DERECHOS -->
     <div class="footer-controls">
-      <div class="slide-counter">
-        SLIDE <span class="current-slide-num" id="currentSlideNum">1</span> // 7
+      <div class="slide-counter-wrapper">
+        <span class="slide-label">SYSTEM_INDEX // </span>
+        <div class="hud-slide-indicator" id="hudSlideIndicator">
+          <!-- Se inyecta dinámicamente -->
+        </div>
+        <div class="slide-counter">
+          SLIDE <span class="current-slide-num" id="currentSlideNum">1</span> // 7
+        </div>
       </div>
-      <button class="ctrl-btn-deck" id="prevBtn" aria-label="Slide anterior (Flecha ←)">
-        <i data-feather="chevron-left"></i>
-      </button>
-      <button class="ctrl-btn-deck" id="nextBtn" aria-label="Siguiente slide (Flecha →)">
-        <i data-feather="chevron-right"></i>
-      </button>
     </div>
 
     <!-- CDNs LIBRERÍAS -->

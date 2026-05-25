@@ -18,7 +18,7 @@ document.addEventListener('DOMContentLoaded', () => {
   initMatrixController();
   initMatrixRain();
   initWebAudioSynth();
-  initSynthwavePlayer();
+  initCyberHud();
   initEnhancedTilt();
   initHackerTypingEffect();
 
@@ -385,13 +385,19 @@ function initGitHubHabitGrid() {
    ========================================================================= */
 function initHorizontalSlideController() {
   const container = document.getElementById('deckContainer');
-  const prevBtn = document.getElementById('prevBtn');
-  const nextBtn = document.getElementById('nextBtn');
   const currentNum = document.getElementById('currentSlideNum');
   const laserTracker = document.getElementById('laserTracker');
   const sidebarLinks = document.querySelectorAll('#sidebarList a');
+  const segmentIndicator = document.getElementById('hudSlideIndicator');
 
-  if (!container || !prevBtn || !nextBtn || !currentNum || !laserTracker) return;
+  if (!container || !currentNum || !laserTracker) return;
+
+  // Inyectar celdas/segmentos de diapositivas en el footer
+  if (segmentIndicator) {
+    segmentIndicator.innerHTML = Array(slides.length).fill(0).map((_, i) => `
+      <div class="indicator-bar ${i === 0 ? 'active' : ''}" data-index="${i}"></div>
+    `).join('');
+  }
 
   // Desplazamiento horizontal elástico asistido por GPU
   function navigateToSlide(idx) {
@@ -412,6 +418,18 @@ function initHorizontalSlideController() {
 
     // Actualizar la numeración en el footer
     currentNum.textContent = currentSlideIdx + 1;
+
+    // Actualizar los segmentos futuristas del slide en el footer
+    const bars = document.querySelectorAll('.indicator-bar');
+    bars.forEach((bar, i) => {
+      if (i === currentSlideIdx) {
+        bar.className = 'indicator-bar active';
+      } else if (i < currentSlideIdx) {
+        bar.className = 'indicator-bar passed';
+      } else {
+        bar.className = 'indicator-bar';
+      }
+    });
 
     // Actualizar la diapositiva activa agregando .active-slide para sus transiciones
     const slidesElements = document.querySelectorAll('.horizontal-slide');
@@ -456,15 +474,6 @@ function initHorizontalSlideController() {
     if (activeLink) laserTracker.style.transform = `translate3d(0, ${activeLink.offsetTop}px, 0)`;
   }, 300);
 
-  // Navegación con flechas en pantalla
-  prevBtn.addEventListener('click', () => {
-    if (currentSlideIdx > 0) navigateToSlide(currentSlideIdx - 1);
-  });
-
-  nextBtn.addEventListener('click', () => {
-    if (currentSlideIdx < slides.length - 1) navigateToSlide(currentSlideIdx + 1);
-  });
-
   // Navegación con teclado lateral (Flechas ← y →)
   document.addEventListener('keydown', (e) => {
     if (window.innerWidth <= 1024) return; // Desactivar en móvil
@@ -485,6 +494,15 @@ function initHorizontalSlideController() {
       const idx = parseInt(link.dataset.index);
       navigateToSlide(idx);
     });
+  });
+
+  // Habilitar clics directos en los indicadores segmentados del footer
+  document.addEventListener('click', (e) => {
+    const bar = e.target.closest('.indicator-bar');
+    if (bar) {
+      const idx = parseInt(bar.dataset.index);
+      navigateToSlide(idx);
+    }
   });
 
   // Adaptar el desplazamiento ante un resize de ventana
@@ -590,33 +608,83 @@ function initMatrixRain() {
   
   const columns = Math.floor(width / 20);
   const yPositions = Array(columns).fill(0);
-  const alphabet = "ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789$#@%&*()[]{}<>+=/\\^~";
+  
+  // Nodos de brillo flotantes (círculos difusos cyan que parpadean suavemente de fondo)
+  const glowNodes = [];
+  for (let i = 0; i < 25; i++) {
+    glowNodes.push({
+      x: Math.random() * width,
+      y: Math.random() * height,
+      radius: Math.random() * 25 + 15,
+      pulseSpeed: Math.random() * 0.03 + 0.01,
+      angle: Math.random() * Math.PI * 2,
+      opacity: Math.random() * 0.35 + 0.15
+    });
+  }
   
   function drawMatrix() {
-    let color = "#22d3ee"; // cian default
-    if (document.body.classList.contains('theme-flare')) color = "#f59e0b";
-    else if (document.body.classList.contains('theme-nebula')) color = "#a855f7";
-    else if (document.body.classList.contains('theme-tokyo')) color = "#ec4899";
+    let themeColor = "#22d3ee"; // cian default
+    let themeGlow = "rgba(34, 211, 238, 0.4)";
+    if (document.body.classList.contains('theme-flare')) {
+      themeColor = "#f59e0b";
+      themeGlow = "rgba(245, 158, 11, 0.4)";
+    } else if (document.body.classList.contains('theme-nebula')) {
+      themeColor = "#a855f7";
+      themeGlow = "rgba(168, 85, 247, 0.4)";
+    } else if (document.body.classList.contains('theme-tokyo')) {
+      themeColor = "#ec4899";
+      themeGlow = "rgba(236, 72, 153, 0.4)";
+    }
 
-    ctx.fillStyle = "rgba(3, 7, 11, 0.08)";
+    // Relleno de fondo con estela
+    ctx.fillStyle = "rgba(3, 7, 11, 0.12)";
     ctx.fillRect(0, 0, width, height);
     
-    ctx.font = "15px monospace";
+    // 1. Dibujar nodos de brillo de fondo (estilo imagen de referencia)
+    glowNodes.forEach(node => {
+      node.angle += node.pulseSpeed;
+      const currentOpacity = node.opacity + Math.sin(node.angle) * 0.08;
+      
+      ctx.save();
+      const grad = ctx.createRadialGradient(node.x, node.y, 2, node.x, node.y, node.radius);
+      grad.addColorStop(0, themeGlow.replace('0.4', currentOpacity.toString()));
+      grad.addColorStop(1, 'rgba(0,0,0,0)');
+      ctx.fillStyle = grad;
+      ctx.beginPath();
+      ctx.arc(node.x, node.y, node.radius, 0, Math.PI * 2);
+      ctx.fill();
+      ctx.restore();
+    });
+    
+    // 2. Dibujar columnas de código binario vertical
+    ctx.font = "14px monospace";
     
     for (let i = 0; i < yPositions.length; i++) {
-      const text = alphabet.charAt(Math.floor(Math.random() * alphabet.length));
+      // Sólo ceros y unos para el tema tecnológico binario
+      const text = Math.random() > 0.5 ? "1" : "0";
       const x = i * 20;
       const y = yPositions[i];
       
-      // Caracter frontal brillante
-      ctx.fillStyle = "#ffffff";
-      ctx.fillText(text, x, y);
+      // Aleatoriamente dar alto brillo (glow) a ciertos caracteres
+      const isGlow = Math.random() > 0.95;
       
-      // Cola de neón
-      ctx.fillStyle = color;
+      if (isGlow) {
+        ctx.save();
+        ctx.shadowColor = themeColor;
+        ctx.shadowBlur = 10;
+        ctx.fillStyle = "#ffffff"; // Blanco brillante para el carácter de cabeza
+        ctx.fillText(text, x, y);
+        ctx.restore();
+      } else {
+        ctx.fillStyle = themeColor;
+        ctx.fillText(text, x, y);
+      }
+      
+      // Estela de desvanecimiento
+      ctx.fillStyle = "rgba(3, 7, 11, 0.02)";
       ctx.fillText(text, x, y - 15);
       
-      if (y > 100 + Math.random() * 10000) {
+      if (y > 100 + Math.random() * 12000) {
         yPositions[i] = 0;
       } else {
         yPositions[i] += 15;
@@ -627,6 +695,11 @@ function initMatrixRain() {
   window.addEventListener('resize', () => {
     width = canvas.width = window.innerWidth;
     height = canvas.height = window.innerHeight;
+    // Redistribuir nodos de brillo
+    glowNodes.forEach(node => {
+      node.x = Math.random() * width;
+      node.y = Math.random() * height;
+    });
   });
 
   function startMatrix() {
@@ -736,121 +809,27 @@ function initMatrixController() {
   }, 100);
 }
 
-// --- 8D. REPRODUCTOR SYNTHWAVE COCKPIT Y SINTETIZADOR DE MÚSICA DE FONDO ---
-let synthPlayerCtx = null;
-let synthPlayerNodes = [];
-let isPlayingProcedural = false;
-
-function playProceduralMusic() {
-  if (isPlayingProcedural) return;
-  isPlayingProcedural = true;
+// --- 8D. CONSOLA DE DIAGNÓSTICOS CIBER-HUD ---
+function initCyberHud() {
+  const hudTemp = document.getElementById('hudCoreTemp');
+  const hudLatency = document.getElementById('hudLatency');
+  const hudMem = document.getElementById('hudMemLoad');
   
-  try {
-    synthPlayerCtx = new (window.AudioContext || window.webkitAudioContext)();
-    const destination = synthPlayerCtx.destination;
-    const now = synthPlayerCtx.currentTime;
-    
-    // Tríada menor cósmica para ambiente cyberpunk relajante: C3, G3, C4, Eb4
-    const freqs = [130.81, 196.00, 261.63, 311.13];
-    
-    const masterGain = synthPlayerCtx.createGain();
-    masterGain.gain.setValueAtTime(0, now);
-    masterGain.gain.linearRampToValueAtTime(0.08, now + 2); // gradual fade in
-    
-    // Filtro de paso bajo
-    const filter = synthPlayerCtx.createBiquadFilter();
-    filter.type = 'lowpass';
-    filter.frequency.setValueAtTime(320, now);
-    
-    // LFO para barridos lentos de filtro espacial
-    const lfo = synthPlayerCtx.createOscillator();
-    lfo.type = 'sine';
-    lfo.frequency.value = 0.12; 
-    
-    const lfoGain = synthPlayerCtx.createGain();
-    lfoGain.gain.value = 180; 
-    
-    lfo.connect(lfoGain);
-    lfoGain.connect(filter.frequency);
-    lfo.start(now);
-    
-    // Generar osciladores combinados sawtooth y triangle
-    freqs.forEach((freq, idx) => {
-      const osc = synthPlayerCtx.createOscillator();
-      osc.type = (idx % 2 === 0) ? 'sawtooth' : 'triangle';
-      osc.frequency.value = freq;
-      
-      const oscGain = synthPlayerCtx.createGain();
-      oscGain.gain.value = 0.25;
-      
-      osc.connect(oscGain);
-      oscGain.connect(filter);
-      
-      osc.start(now);
-      synthPlayerNodes.push(osc);
-    });
-    
-    // Efecto de eco / Delay espacial
-    const delay = synthPlayerCtx.createDelay();
-    delay.delayTime.value = 0.55;
-    
-    const delayFeedback = synthPlayerCtx.createGain();
-    delayFeedback.gain.value = 0.45;
-    
-    filter.connect(masterGain);
-    masterGain.connect(destination);
-    
-    filter.connect(delay);
-    delay.connect(delayFeedback);
-    delayFeedback.connect(delay); // bucle de retroalimentación
-    delayFeedback.connect(masterGain);
-    
-    synthPlayerNodes.push(lfo, filter, masterGain, delay, delayFeedback);
-  } catch (e) {
-    console.warn("AudioContext block for procedural ambient generation", e);
-  }
-}
-
-function stopProceduralMusic() {
-  if (!isPlayingProcedural) return;
-  isPlayingProcedural = false;
+  if (!hudTemp || !hudLatency || !hudMem) return;
   
-  if (synthPlayerNodes.length > 0) {
-    synthPlayerNodes.forEach(node => {
-      try {
-        node.stop();
-      } catch (e) {}
-    });
-    synthPlayerNodes = [];
-  }
-  if (synthPlayerCtx) {
-    synthPlayerCtx.close();
-    synthPlayerCtx = null;
-  }
-}
-
-function initSynthwavePlayer() {
-  const player = document.querySelector('.synthwave-player');
-  const playBtn = document.getElementById('playPauseBtn');
-  const trackName = document.getElementById('trackName');
-  
-  if (!player || !playBtn || !trackName) return;
-  
-  trackName.textContent = "Live_Synth_Pad.sys";
-  
-  playBtn.addEventListener('click', () => {
-    if (player.classList.contains('playing')) {
-      player.classList.remove('playing');
-      playBtn.innerHTML = '<i data-feather="play" style="width: 14px; height: 14px;"></i>';
-      if (window.feather) window.feather.replace();
-      stopProceduralMusic();
-    } else {
-      player.classList.add('playing');
-      playBtn.innerHTML = '<i data-feather="pause" style="width: 14px; height: 14px;"></i>';
-      if (window.feather) window.feather.replace();
-      playProceduralMusic();
-    }
-  });
+  setInterval(() => {
+    // Fluctuación de temperatura (36°C a 42°C)
+    const temp = Math.floor(Math.random() * 6 + 36);
+    hudTemp.textContent = `${temp}°C`;
+    
+    // Fluctuación de latencia (10ms a 18ms)
+    const latency = Math.floor(Math.random() * 9 + 10);
+    hudLatency.textContent = `${latency}ms`;
+    
+    // Fluctuación de carga de memoria (28% a 36%)
+    const mem = Math.floor(Math.random() * 9 + 28);
+    hudMem.textContent = `${mem}%`;
+  }, 1500);
 }
 
 // --- 8E. EFECTO GLITCH MATRIX EN TEXTOS DE ENCABEZADO ---
@@ -880,8 +859,8 @@ window.typeHackerTitle = function(element, text) {
 function initHackerTypingEffect() {
   const welcomeTitle = document.querySelector('.welcome-title');
   if (welcomeTitle) {
-    welcomeTitle.dataset.original = "Yankarlo Morán";
-    typeHackerTitle(welcomeTitle, "Yankarlo Morán");
+    welcomeTitle.dataset.original = "Gabriel Angel";
+    typeHackerTitle(welcomeTitle, "Gabriel Angel");
   }
 }
 

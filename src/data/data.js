@@ -1,7 +1,7 @@
 // Datos del Proyecto de Vida - Edita este archivo para personalizar toda tu información
 export const lifeProjectData = {
   personalInfo: {
-    name: "Yankarlo Morán",
+    name: "Gabriel Angel",
     title: "Mi Proyecto de Vida",
     subtitle: "Un viaje de crecimiento, autodescubrimiento y realización personal",
     tagline: "El éxito no se mide por lo que logras, sino por la persona en la que te conviertes en el proceso.",
