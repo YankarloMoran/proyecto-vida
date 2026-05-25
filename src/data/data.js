@@ -1,28 +1,39 @@
-// Datos del Proyecto de Vida - Edita este archivo para personalizar toda tu información
+// Datos del Proyecto de Vida Colectivo - Ingeniería en Sistemas
 export const lifeProjectData = {
   personalInfo: {
-    name: "Gabriel Angel",
-    title: "Mi Proyecto de Vida",
-    subtitle: "Un viaje de crecimiento, autodescubrimiento y realización personal",
-    tagline: "El éxito no se mide por lo que logras, sino por la persona en la que te conviertes en el proceso.",
-    introText: "Este espacio representa mi mapa de ruta hacia el futuro. Es una recopilación consciente de quién soy, qué valoro, hacia dónde me dirijo y los pasos concretos que tomaré para alcanzar una vida plena, equilibrada e inspiradora. Aquí plasmo mis metas, mis principios y el compromiso conmigo mismo para el corto, mediano y largo plazo.",
+    name: "Ingeniería en Sistemas",
+    title: "Proyecto de Vida Profesional Colectivo",
+    subtitle: "Nuestro Mapa de Ruta hacia la Excelencia",
+    tagline: "La tecnología es el medio; el crecimiento humano, científico y la sinergia colectiva son nuestro fin.",
+    introText: "Este espacio representa la visión y planificación estratégica de nuestro equipo de Ingeniería en Sistemas. Diseñamos nuestras metas, analizamos nuestro FODA colectivo, equilibramos nuestras áreas de desarrollo y estructuramos un plan de acción para alcanzar el éxito profesional.",
     values: [
-      { name: "Integridad", icon: "shield", desc: "Actuar con honestidad y coherencia entre mis pensamientos y acciones." },
-      { name: "Crecimiento", icon: "trending-up", desc: "Aprender constantemente y salir de mi zona de confort." },
-      { name: "Gratitud", icon: "heart", desc: "Apreciar cada experiencia y valorar a las personas que me rodean." },
-      { name: "Disciplina", icon: "activity", desc: "Mantener el enfoque y la constancia en mis hábitos diarios." }
+      { name: "Sinergia", icon: "users", desc: "Colaborar de manera efectiva para lograr un impacto colectivo superior." },
+      { name: "Crecimiento", icon: "trending-up", desc: "Aprender constantemente y dominar nuevas fronteras tecnológicas." },
+      { name: "Integridad", icon: "shield", desc: "Actuar con ética y coherencia en el diseño y desarrollo de soluciones." },
+      { name: "Disciplina", icon: "activity", desc: "Mantener el enfoque y la constancia en el desarrollo de nuestras habilidades." }
     ]
   },
+  members: [
+    { name: "Bay Rodas, Douglas Josue", node: "NODE_C" },
+    { name: "Flores Prado, José Andrés", node: "NODE_C" },
+    { name: "Barrera Yanes, Andre Sofía", node: "NODE_A" },
+    { name: "Gonzalez Gomez, Marisabel Saraí", node: "NODE_A" },
+    { name: "Angel Berganza, Gabriel Antonio", node: "NODE_A" },
+    { name: "Ramirez López, Luis Pedro", node: "NODE_E" },
+    { name: "Alvarez Monzon, Hector Adrian", node: "NODE_B" },
+    { name: "Paxtor Cordova, Yasmin del Rosario", node: "NODE_D" },
+    { name: "López Rivera, María Jimena", node: "NODE_H" }
+  ],
   
   foda: {
     fortalezas: {
       title: "Fortalezas",
-      desc: "Aspectos internos positivos que poseo y me impulsan.",
+      desc: "Aspectos internos positivos que poseemos como equipo y nos impulsan.",
       items: [
-        "Resiliencia ante situaciones adversas y capacidad de adaptación.",
-        "Autodisciplina y alto nivel de compromiso con mis objetivos.",
-        "Pensamiento analítico y facilidad para resolver problemas.",
-        "Empatía y habilidades de comunicación efectivas."
+        "Sinergia de equipo y excelente complementariedad de perfiles técnicos.",
+        "Autodisciplina, adaptabilidad y alto compromiso académico.",
+        "Pensamiento analítico avanzado y capacidad colectiva de resolución de problemas.",
+        "Habilidades de comunicación y empatía en el desarrollo cooperativo."
       ],
       color: "from-cyan-600/20 to-teal-600/20",
       borderColor: "border-cyan-500/30",
@@ -30,12 +41,12 @@ export const lifeProjectData = {
     },
     debilidades: {
       title: "Debilidades",
-      desc: "Aspectos internos que debo trabajar y mejorar.",
+      desc: "Aspectos internos de mejora constante en nuestro rendimiento.",
       items: [
-        "Tendencia al perfeccionismo que puede retrasar mis entregas.",
-        "Dificultad ocasional para delegar tareas en proyectos grupales.",
-        "Gestión del estrés en temporadas de alta carga académica o laboral.",
-        "Impaciencia por ver resultados inmediatos en mis procesos."
+        "Tendencia al perfeccionismo que puede prolongar los tiempos de desarrollo.",
+        "Distribución de cargas en periodos con alta concurrencia académica.",
+        "Gestión inicial de la fatiga ante proyectos simultáneos de gran envergadura.",
+        "Brechas individuales en lenguajes o herramientas emergentes muy específicos."
       ],
       color: "from-indigo-600/20 to-violet-600/20",
       borderColor: "border-indigo-500/30",
@@ -43,12 +54,12 @@ export const lifeProjectData = {
     },
     oportunidades: {
       title: "Oportunidades",
-      desc: "Factores externos que puedo aprovechar para mi crecimiento.",
+      desc: "Factores externos del entorno que podemos capitalizar.",
       items: [
-        "Acceso a una amplia variedad de cursos de especialización en línea.",
-        "Crecimiento del mercado laboral en áreas tecnológicas y digitales.",
-        "Red de contactos académicos y profesionales en expansión.",
-        "Posibilidades de becas e intercambios internacionales."
+        "Acceso a una amplia gama de certificaciones de primer nivel en línea.",
+        "Alta demanda global de ingenieros de sistemas y arquitectos de software.",
+        "Redes de contactos universitarios y eventos tecnológicos (Hackathons).",
+        "Evolución acelerada de la IA para potenciar la productividad y el desarrollo."
       ],
       color: "from-emerald-600/20 to-teal-600/20",
       borderColor: "border-emerald-500/30",
@@ -56,12 +67,12 @@ export const lifeProjectData = {
     },
     amenazas: {
       title: "Amenazas",
-      desc: "Factores externos fuera de mi control que debo mitigar.",
+      desc: "Factores externos fuera de nuestro control que debemos mitigar.",
       items: [
-        "Alta competencia en el sector laboral y profesional.",
-        "Cambios rápidos en los requerimientos tecnológicos globales.",
-        "Situación económica inestable que puede impactar presupuestos.",
-        "Distracciones digitales y sobrecarga de información."
+        "Alta competitividad y saturación en el mercado de software junior.",
+        "Obsolescencia vertiginosa de librerías, frameworks y lenguajes.",
+        "Cambios rápidos en las dinámicas de contratación tecnológica.",
+        "Distracciones digitales y fatiga por sobrecarga informática (infoxicación)."
       ],
       color: "from-blue-600/20 to-cyan-600/20",
       borderColor: "border-blue-500/30",
@@ -70,80 +81,80 @@ export const lifeProjectData = {
   },
 
   ruedaDeLaVida: [
-    { area: "Salud & Energía", score: 8, icon: "heart", desc: "Nutrición, ejercicio físico regular, descanso y energía diaria." },
-    { area: "Desarrollo Profesional", score: 7, icon: "briefcase", desc: "Metas profesionales, estudios, habilidades técnicas y carrera." },
-    { area: "Finanzas Personales", score: 6, icon: "dollar-sign", desc: "Ahorro, inversiones, presupuesto inteligente y libertad financiera." },
-    { area: "Crecimiento Personal", score: 8, icon: "book-open", desc: "Autoconocimiento, lectura, cursos, meditación y espiritualidad." },
-    { area: "Familia & Hogar", score: 9, icon: "home", desc: "Calidad de relación con padres, hermanos y ambiente en el hogar." },
-    { area: "Amistad / Social", score: 7, icon: "users", desc: "Relaciones de amistad profundas, apoyo mutuo y vida social." },
-    { area: "Amor & Pareja", score: 6, icon: "smile", desc: "Relación afectiva, comunicación íntima, crecimiento conjunto." },
-    { area: "Ocio & Recreación", score: 7, icon: "compass", desc: "Hobbies, viajes, diversión, desconexión y disfrute del presente." }
+    { area: "Salud & Energía", score: 8, icon: "heart", desc: "Gestión colectiva del estrés, ergonomía en el trabajo y hábitos saludables." },
+    { area: "Desarrollo Técnico", score: 9, icon: "cpu", desc: "Dominio de lenguajes, algoritmos, arquitectura de software y DevOps." },
+    { area: "Proyectos & Negocios", score: 7, icon: "trending-up", desc: "Ideación de soluciones viables, presupuestos e innovación en productos." },
+    { area: "Crecimiento Científico", score: 8, icon: "book-open", desc: "Lectura de documentación, cursos de especialización y certificaciones." },
+    { area: "Entorno de Trabajo", score: 8, icon: "home", desc: "Optimización de estaciones de programación, hardware y software eficiente." },
+    { area: "Sinergia Social", score: 8, icon: "users", desc: "Networking, colaboración activa en comunidades y marcas personales en GitHub." },
+    { area: "Liderazgo & Cooperación", score: 9, icon: "award", desc: "Capacidad de guiar, inspirar, y organizar el trabajo en equipo con metodologías ágiles." },
+    { area: "Recreación & Balance", score: 7, icon: "compass", desc: "Prevención del burnout mediante pasatiempos, descanso mental y desconexión activa." }
   ],
 
   metas: [
     {
       id: "corto-plazo",
       timeframe: "Corto Plazo (1 Año)",
-      title: "Consolidación y Crecimiento Académico",
-      desc: "Enfocarme en el desarrollo de bases sólidas, hábitos saludables y mis primeras experiencias prácticas.",
+      title: "Consolidación y Sinergia Académica",
+      desc: "Sentar bases sólidas en metodologías de desarrollo, bases de datos y resolver problemas mediante código limpio y estructurado.",
       items: [
-        { title: "Excelencia Académica", detail: "Mantener un promedio sobresaliente en mis estudios universitarios y participar en proyectos de investigación." },
-        { title: "Inglés Profesional", detail: "Certificar mi nivel de inglés a nivel B2/C1 mediante un examen internacional reconocido." },
-        { title: "Bienestar Físico", detail: "Hacer ejercicio por lo menos 4 veces por semana y establecer un horario de sueño consistente de 7-8 horas." },
-        { title: "Creación de Portafolio", detail: "Desarrollar y publicar 3 proyectos web significativos que muestren mis habilidades de programación." }
+        { title: "Excelencia Académica Colectiva", detail: "Mantener un promedio grupal sobresaliente participando activamente en proyectos prácticos." },
+        { title: "Certificaciones Técnicas", detail: "Obtener certificaciones en desarrollo web moderno, Git, y administración de bases de datos." },
+        { title: "Inglés Técnico Profesional", detail: "Consolidar habilidades de lectura y comunicación técnica en inglés a nivel B2." },
+        { title: "Portafolio de Repositorios", detail: "Desarrollar y publicar de forma cooperativa al menos 3 proyectos en GitHub con código limpio." }
       ]
     },
     {
       id: "mediano-plazo",
       timeframe: "Mediano Plazo (5 Años)",
-      title: "Especialización e Inserción Profesional",
-      desc: "Lograr mi graduación, insertarme en el mercado profesional de alto nivel y comenzar a construir mi independencia financiera.",
+      title: "Especialización e Inserción en la Industria",
+      desc: "Lograr nuestra graduación profesional, insertarnos en el sector corporativo de alto valor y especializarnos en campos complejos.",
       items: [
-        { title: "Graduación y Título", detail: "Obtener mi título profesional con honores y realizar una especialización en desarrollo de software moderno." },
-        { title: "Primer Empleo Senior", detail: "Posicionarme como desarrollador Full-Stack en una empresa internacional de tecnología con trabajo remoto." },
-        { title: "Independencia Habitacional", detail: "Mudarme a mi propio departamento y amueblarlo de forma sostenible y minimalista." },
-        { title: "Fondo de Emergencia", detail: "Consolidar un fondo de ahorro equivalente a 6 meses de mis gastos y empezar a invertir en fondos indexados." }
+        { title: "Egreso e Ingeniería", detail: "Culminar la carrera de Ingeniería en Sistemas con honores y desarrollar proyectos de tesis de alto impacto social." },
+        { title: "Inserción Profesional Senior", detail: "Posicionarnos como Ingenieros de Software, DevOps o Arquitectos en empresas internacionales líderes." },
+        { title: "Investigación aplicada", detail: "Colaborar en proyectos científicos orientados a resolver problemas reales mediante Inteligencia Artificial y Datos." },
+        { title: "Modelos de Emprendimiento", detail: "Estructurar ideas de startups tecnológicas o consultoras de desarrollo de software a medida." }
       ]
     },
     {
       id: "largo-plazo",
       timeframe: "Largo Plazo (10 Años)",
-      title: "Liderazgo, Libertad Financiera y Trascendencia",
-      desc: "Convertirme en un referente en mi área de especialización, diversificar mis ingresos y aportar valor a la sociedad.",
+      title: "Liderazgo, Innovación y Trascendencia",
+      desc: "Convertirnos en referentes tecnológicos, liderar la transformación digital e impulsar el talento en futuras generaciones.",
       items: [
-        { title: "Emprendimiento Propio o Rol de Liderazgo", detail: "Fundar mi propia consultora de tecnología o liderar equipos de desarrollo como Principal Engineer." },
-        { title: "Libertad Financiera", detail: "Tener múltiples fuentes de ingresos pasivos (bienes raíces, inversiones) que cubran mi estilo de vida básico." },
-        { title: "Viaje y Aventura Global", detail: "Haber visitado al menos 10 países y tener la capacidad de trabajar como nómada digital desde cualquier parte." },
-        { title: "Impacto y Mentoría", detail: "Crear una iniciativa de mentoría gratuita o canal educativo para jóvenes que desean iniciarse en el mundo de la tecnología." }
+        { title: "Liderazgo Tecnológico (CTO / Principal)", detail: "Liderar departamentos de ingeniería como CTOs, arquitectos jefes o directores de innovación global." },
+        { title: "Plataformas Sustentables", detail: "Lanzar soluciones de software con modelos de negocios viables e impacto social positivo sostenible." },
+        { title: "Red de Colaboración Global", detail: "Establecer lazos internacionales para el desarrollo tecnológico multidisciplinario y la transferencia de conocimiento." },
+        { title: "Mentoría e Impacto", detail: "Crear bootcamps, comunidades de código abierto y mentorías para empoderar a nuevos talentos en sistemas." }
       ]
     }
   ],
 
   misionVision: {
     mision: {
-      title: "Mi Misión Personal",
-      text: "Convertirme cada día en mi mejor versión a través del aprendizaje constante, la disciplina y la empatía. Aspiro a utilizar mis habilidades lógicas y tecnológicas para resolver problemas reales del mundo, aportando valor a la sociedad y construyendo relaciones humanas profundas y honestas basadas en el respeto y el apoyo mutuo.",
+      title: "Misión del Equipo",
+      text: "Formarnos como Ingenieros en Sistemas íntegros, de excelencia científica y humana, a través de la investigación constante, la disciplina y el trabajo cooperativo. Buscamos aplicar la lógica algorítmica y las tecnologías emergentes para diseñar y construir soluciones éticas y de alto rendimiento que impulsen la transformación digital y resuelvan problemas complejos de la sociedad moderna.",
       accent: "from-cyan-500 to-indigo-500"
     },
     vision: {
-      title: "Mi Visión de Futuro",
-      text: "Ser un profesional líder y un ser humano íntegro, reconocido por mi capacidad de innovación y empatía. Visualizo una vida de plenitud y libertad donde mi salud, carrera, finanzas y relaciones estén en equilibrio, permitiéndome explorar el mundo como nómada digital y servir de inspiración y mentor para futuras generaciones de creativos y programadores.",
+      title: "Visión del Equipo",
+      text: "Ser una generación de profesionales líderes y referentes de innovación y excelencia en el ecosistema tecnológico global. Nos proyectamos liderando la arquitectura de software del futuro, promoviendo el equilibrio ético, el desarrollo digital sostenible y sirviendo como mentores e inspiradores para el crecimiento de nuevos talentos en la ingeniería del mañana.",
       accent: "from-indigo-500 to-emerald-500"
     }
   },
 
   planDeAccion: {
     dailyHabits: [
-      { id: "habit-1", name: "Meditación y Enfoque (10 min)", icon: "compass", time: "Mañana" },
-      { id: "habit-2", name: "Ejercicio Físico Regular", icon: "activity", time: "Mañana / Tarde" },
-      { id: "habit-3", name: "Lectura de Crecimiento (20 págs)", icon: "book", time: "Tarde / Noche" },
-      { id: "habit-4", name: "Estudio y Práctica de Código (1h)", icon: "code", time: "Cualquier momento" },
-      { id: "habit-5", name: "Agradecimiento y Planificación Diaria", icon: "edit-3", time: "Noche" }
+      { id: "habit-1", name: "Algoritmos y Planificación (15 min)", icon: "compass", time: "Mañana" },
+      { id: "habit-2", name: "Ejercicio y Gestión de Energía", icon: "activity", time: "Mañana / Tarde" },
+      { id: "habit-3", name: "Lectura de Documentación y API docs", icon: "book", time: "Tarde / Noche" },
+      { id: "habit-4", name: "Programación y Code Review (1h)", icon: "code", time: "Cualquier momento" },
+      { id: "habit-5", name: "Análisis Semanal y Sprints (Agile)", icon: "edit-3", time: "Noche" }
     ],
     strategies: [
-      { title: "Estrategia de Enfoque Profundo (Deep Work)", desc: "Establecer bloques de 90 minutos de trabajo ininterrumpido sin teléfono ni redes sociales para maximizar mi aprendizaje académico y de desarrollo." },
-      { title: "Estrategia Financiera 50-30-20", desc: "Asignar un 50% de mis ingresos a necesidades básicas, un 30% a metas personales/deseos y ahorrar o invertir el 20% religiosamente todos los meses." },
-      { title: "Reunión de Crecimiento Semanal", desc: "Cada domingo evaluar mis metas de la semana, reajustar mi agenda, actualizar la Rueda de la Vida y celebrar mis victorias, sin importar cuán pequeñas sean." }
+      { title: "Estrategia de Enfoque Profundo (Deep Work)", desc: "Establecer bloques de 90 minutos de trabajo libre de interrupciones digitales para dominar arquitecturas complejas de software y algoritmos sofisticados." },
+      { title: "Scrum y Tableros Kanban", desc: "Organizar nuestras tareas y responsabilidades en tableros visuales interactivos, evaluando el progreso individual y de equipo al final de cada ciclo." },
+      { title: "Integración Continua y Calidad de Código", desc: "Ejecutar pruebas exhaustivas, revisar el código recíprocamente y mantener baja la deuda técnica mediante refactorización activa." }
     ]
   }
 };

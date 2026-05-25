@@ -326,10 +326,31 @@ body {
   flex-shrink: 0;
   display: flex;
   flex-direction: column;
-  justify-content: center;
-  padding: 5rem 6rem;
+  justify-content: flex-start; /* Evita recortes del contenido al desbordar */
+  padding: 5.5rem 4rem 4rem 4rem; /* Un espacio superior muy pulido para el contenido y el scroll */
   position: relative;
-  overflow: hidden;
+  overflow-y: auto;
+  scrollbar-width: thin;
+  scrollbar-color: var(--border-neon) transparent;
+}
+
+#hero.horizontal-slide {
+  justify-content: center; /* Hero es corto, se mantiene centrado */
+  padding: 3rem 4rem;
+}
+
+.horizontal-slide::-webkit-scrollbar {
+  width: 4px;
+}
+.horizontal-slide::-webkit-scrollbar-track {
+  background: transparent;
+}
+.horizontal-slide::-webkit-scrollbar-thumb {
+  background: var(--border-neon);
+  border-radius: 4px;
+}
+.horizontal-slide::-webkit-scrollbar-thumb:hover {
+  background: var(--text-neon-cyan);
 }
 
 /* ==========================================================================
@@ -1489,4 +1510,251 @@ input:checked + .slider-round::before {
 }
 .tech-panel > * {
   transform: translateZ(20px); /* Profundidad interna 3D */
+}
+
+/* ==========================================================================
+   GRID DE INTEGRANTES CIBERNÉTICOS (MEMBER NODES)
+   ========================================================================== */
+.member-deck-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 1.2rem;
+  max-width: 1100px;
+  width: 100%;
+  margin-top: 1rem;
+}
+
+.member-card {
+  background: var(--card-bg);
+  border: 1px solid var(--border-neon);
+  border-radius: 8px;
+  padding: 1rem 1.2rem;
+  box-shadow: 0 10px 25px rgba(0, 0, 0, 0.4);
+  position: relative;
+  overflow: hidden;
+  transition: var(--transition-fast);
+  transform-style: preserve-3d;
+  perspective: 1000px;
+}
+
+.member-card::before {
+  content: "";
+  position: absolute;
+  top: 0; left: 0;
+  width: 100%; height: 2px;
+  background: linear-gradient(90deg, var(--color-cyan) 0%, var(--color-emerald) 100%);
+  opacity: 0.6;
+}
+
+.member-card:hover {
+  background: var(--card-bg-hover);
+  border-color: var(--border-neon-hover);
+  box-shadow: 0 15px 35px rgba(6, 182, 212, 0.12);
+  transform: translateY(-3px);
+}
+
+.member-glow {
+  position: absolute;
+  top: 0; left: 0; right: 0; bottom: 0;
+  background: radial-gradient(circle at var(--mouse-x, 50%) var(--mouse-y, 50%), rgba(34, 211, 238, 0.08) 0%, transparent 60%);
+  pointer-events: none;
+  opacity: 0;
+  transition: opacity 0.3s ease;
+}
+.member-card:hover .member-glow {
+  opacity: 1;
+}
+
+.member-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 0.5rem;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.03);
+  padding-bottom: 0.3rem;
+}
+
+.member-role {
+  font-family: var(--font-mono);
+  font-size: 0.55rem;
+  color: var(--text-neon-cyan);
+  letter-spacing: 0.1em;
+}
+
+.member-icon {
+  width: 11px;
+  height: 11px;
+  color: var(--text-dim);
+}
+.member-card:hover .member-icon {
+  color: var(--text-neon-emerald);
+  filter: drop-shadow(0 0 4px var(--text-neon-emerald));
+}
+
+.member-name {
+  font-family: var(--font-display);
+  font-size: 0.95rem;
+  font-weight: 700;
+  color: var(--text-bright);
+  line-height: 1.3;
+  margin-bottom: 0.4rem;
+}
+
+.member-badge {
+  display: inline-block;
+  font-family: var(--font-mono);
+  font-size: 0.6rem;
+  color: var(--text-neon-emerald);
+  background: rgba(16, 185, 129, 0.06);
+  border: 1px solid rgba(16, 185, 129, 0.2);
+  padding: 0.1rem 0.4rem;
+  border-radius: 4px;
+}
+
+/* scanline laser */
+.holographic-scanline {
+  position: fixed;
+  top: 0; left: 0;
+  width: 100vw; height: 3px;
+  background: linear-gradient(to right, transparent, var(--border-neon-hover), transparent);
+  box-shadow: 0 0 8px var(--text-neon-cyan);
+  z-index: 999;
+  pointer-events: none;
+  opacity: 0.15;
+  animation: scanlineScroll 6s infinite linear;
+}
+@keyframes scanlineScroll {
+  0% { transform: translateY(-5vh); }
+  100% { transform: translateY(105vh); }
+}
+
+/* ==========================================================================
+   CORRECCIONES DE ESCALA PARA EVITAR OVERFLOWS EN LAPTOPS (SIZING FIXES)
+   ========================================================================== */
+.rueda-chart-panel {
+  height: 400px;
+  width: 100%;
+}
+.rueda-polar-container {
+  max-height: 430px;
+  gap: 2rem;
+}
+.rueda-polar-container canvas {
+  max-height: 380px !important;
+}
+.polar-sliders {
+  max-height: 400px;
+}
+.foda-radar-grid {
+  gap: 1.2rem;
+}
+.foda-panel {
+  padding: 1.5rem;
+}
+.welcome-grid {
+  gap: 2rem;
+}
+.orbital-art-container {
+  max-width: 260px;
+  max-height: 260px;
+}
+.goal-detail-display {
+  margin-top: 1.5rem;
+  min-height: 180px;
+}
+.goal-checklist-grid {
+  gap: 1rem;
+}
+.goal-checklist-card {
+  padding: 0.8rem 1rem;
+}
+
+@media (max-height: 800px) {
+  .slide-header {
+    margin-bottom: 1.8rem;
+  }
+  .slide-header h2 {
+    font-size: 2.1rem;
+  }
+  .welcome-title {
+    font-size: 3.5rem;
+  }
+  .tech-panel {
+    padding: 1.2rem 1.8rem;
+  }
+  .rueda-chart-panel {
+    height: 300px;
+  }
+  .rueda-polar-container {
+    max-height: 330px;
+    gap: 1rem;
+  }
+  .rueda-polar-container canvas {
+    max-height: 270px !important;
+  }
+  .polar-sliders {
+    max-height: 290px;
+  }
+  .member-deck-grid {
+    gap: 0.8rem;
+    margin-top: 0.5rem;
+  }
+  .member-card {
+    padding: 0.7rem 0.9rem;
+  }
+  .member-name {
+    font-size: 0.82rem;
+    margin-bottom: 0.2rem;
+  }
+  .member-badge {
+    font-size: 0.55rem;
+    padding: 0.05rem 0.3rem;
+  }
+  .member-header {
+    margin-bottom: 0.3rem;
+    padding-bottom: 0.2rem;
+  }
+  .foda-radar-grid {
+    gap: 0.8rem;
+  }
+  .foda-panel {
+    padding: 1rem 1.4rem;
+  }
+  .sci-list li {
+    font-size: 0.78rem;
+    margin-bottom: 0.2rem;
+  }
+  .sci-mv-grid {
+    gap: 1.5rem;
+  }
+  .sci-mv-card {
+    padding: 1.2rem 1.8rem;
+  }
+  .sci-mv-text {
+    font-size: 0.95rem;
+    line-height: 1.5;
+  }
+  .github-habit-info {
+    font-size: 0.8rem;
+  }
+  .habit-cube {
+    width: 20px;
+    height: 20px;
+  }
+  .github-habits-container {
+    gap: 0.8rem;
+  }
+  .sci-slider-box {
+    padding: 0.4rem 1rem;
+  }
+  .goal-checklist-grid {
+    gap: 0.6rem;
+  }
+  .goal-checklist-card {
+    padding: 0.6rem 0.8rem;
+  }
+  .goal-detail-display {
+    margin-top: 1rem;
+    min-height: 150px;
+  }
 }

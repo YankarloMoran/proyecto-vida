@@ -40,16 +40,28 @@ function initDataInjection() {
   document.getElementById('heroTagline').textContent = data.personalInfo.tagline;
   document.getElementById('heroIntro').textContent = data.personalInfo.introText;
 
-  // Quién Soy - Perfil
-  document.getElementById('profileName').textContent = data.personalInfo.name;
-  
-  // Quién Soy - Valores en Órbita / Nubes de Tags
-  const valuesContainer = document.getElementById('valuesContainer');
-  valuesContainer.innerHTML = data.personalInfo.values.map(val => `
-    <div class="sci-tag" data-tilt data-tilt-max="15">
-      <span style="color: var(--text-neon-cyan); font-weight: 700;"># ${val.name}</span> // ${val.desc}
-    </div>
-  `).join('');
+  // Inyectar Integrantes en Slide 2
+  const memberDeckGrid = document.getElementById('memberDeckGrid');
+  if (memberDeckGrid) {
+    memberDeckGrid.innerHTML = data.members.map(member => `
+      <div class="member-card" data-tilt data-tilt-max="10">
+        <div class="member-glow"></div>
+        <div class="member-header">
+          <span class="member-role">[MEMBER_NODE]</span>
+          <i data-feather="user" class="member-icon" style="width: 12px; height: 12px;"></i>
+        </div>
+        <h4 class="member-name">${member.name}</h4>
+        <span class="member-badge">${member.node}</span>
+      </div>
+    `).join('');
+  }
+
+  // Inyectar scanline láser holográfico de fondo
+  if (!document.querySelector('.holographic-scanline')) {
+    const scanline = document.createElement('div');
+    scanline.classList.add('holographic-scanline');
+    document.body.appendChild(scanline);
+  }
 
   // FODA Grid "Radar Scan"
   const fodaGrid = document.getElementById('fodaGrid');
@@ -90,7 +102,11 @@ function initDataInjection() {
 
   // Plan de Acción - Estrategias
   const strategiesContainer = document.getElementById('strategiesContainer');
-  strategiesContainer.innerHTML += data.planDeAccion.strategies.map(strat => `
+  strategiesContainer.innerHTML = `
+    <h3 style="color: var(--text-neon-cyan); display: flex; align-items: center; gap: 0.6rem; margin-bottom: 1rem;">
+      <i data-feather="cpu"></i> Protocolos de Enfoque
+    </h3>
+  ` + data.planDeAccion.strategies.map(strat => `
     <div class="sci-slider-box" style="margin-bottom: 1rem; border: 1px solid rgba(255,255,255,0.03);">
       <h4 style="font-family: var(--font-display); font-size: 0.95rem; color: var(--text-bright); display: flex; align-items: center; gap: 0.6rem;">
         <i data-feather="terminal" style="color: var(--text-neon-cyan); width: 16px;"></i> ${strat.title}
@@ -859,15 +875,15 @@ window.typeHackerTitle = function(element, text) {
 function initHackerTypingEffect() {
   const welcomeTitle = document.querySelector('.welcome-title');
   if (welcomeTitle) {
-    welcomeTitle.dataset.original = "Gabriel Angel";
-    typeHackerTitle(welcomeTitle, "Gabriel Angel");
+    welcomeTitle.dataset.original = "Ingeniería en Sistemas";
+    typeHackerTitle(welcomeTitle, "Ingeniería en Sistemas");
   }
 }
 
 // --- 8F. PERSPECTIVA 3D TILT EN TODOS LOS TECH PANELS ---
 function initEnhancedTilt() {
   if (window.VanillaTilt) {
-    window.VanillaTilt.init(document.querySelectorAll(".tech-panel"), {
+    window.VanillaTilt.init(document.querySelectorAll(".tech-panel, .member-card"), {
       max: 8,
       speed: 300,
       glare: true,
@@ -875,4 +891,16 @@ function initEnhancedTilt() {
       perspective: 1000
     });
   }
+
+  // Rastrear posición del mouse para el brillo de las tarjetas
+  document.addEventListener('mousemove', (e) => {
+    const card = e.target.closest('.member-card');
+    if (card) {
+      const rect = card.getBoundingClientRect();
+      const x = e.clientX - rect.left;
+      const y = e.clientY - rect.top;
+      card.style.setProperty('--mouse-x', `${x}px`);
+      card.style.setProperty('--mouse-y', `${y}px`);
+    }
+  });
 }
