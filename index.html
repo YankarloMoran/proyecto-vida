@@ -1,0 +1,237 @@
+<!doctype html>
+<html lang="es">
+  <head>
+    <meta charset="UTF-8" />
+    <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Yankarlo Morán - Proyecto de Vida (Cyber Aurora)</title>
+    <!-- Hoja de Estilo Principal -->
+    <link rel="stylesheet" href="/src/style.css" />
+  </head>
+  <body>
+    <!-- Puntero Sci-Fi de Neón Personalizado -->
+    <div class="neon-cursor" id="neonCursor"></div>
+    <div class="neon-cursor-glow" id="neonCursorGlow"></div>
+
+    <!-- Auroras Boreales Dinámicas y Retícula Sci-Fi de Fondo -->
+    <div class="tech-grid-overlay"></div>
+    <div class="aurora-container">
+      <div class="aurora aurora-1"></div>
+      <div class="aurora aurora-2"></div>
+      <div class="aurora aurora-3"></div>
+      <div class="particles-container" id="particlesContainer"></div>
+    </div>
+
+    <!-- BARRA DE NAVEGACIÓN LATERAL DE CRISTAL (LEFT SIDEBAR) -->
+    <aside class="sidebar-nav">
+      <div class="sidebar-logo">
+        <h2>LIFE</h2>
+        <span>Vector // 2.0</span>
+      </div>
+      <nav style="position: relative;">
+        <!-- Línea láser indicadora de posición active -->
+        <div class="laser-line-tracker" id="laserTracker"></div>
+        <ul class="nav-list" id="sidebarList">
+          <li>
+            <a href="#hero" class="nav-item active" data-index="0">
+              <span class="nav-num">01 //</span> Inicio
+            </a>
+          </li>
+          <li>
+            <a href="#quiensoy" class="nav-item" data-index="1">
+              <span class="nav-num">02 //</span> Quién Soy
+            </a>
+          </li>
+          <li>
+            <a href="#foda" class="nav-item" data-index="2">
+              <span class="nav-num">03 //</span> FODA Scan
+            </a>
+          </li>
+          <li>
+            <a href="#rueda" class="nav-item" data-index="3">
+              <span class="nav-num">04 //</span> Rueda Vital
+            </a>
+          </li>
+          <li>
+            <a href="#timeline" class="nav-item" data-index="4">
+              <span class="nav-num">05 //</span> Metas
+            </a>
+          </li>
+          <li>
+            <a href="#misionvision" class="nav-item" data-index="5">
+              <span class="nav-num">06 //</span> Propósito
+            </a>
+          </li>
+          <li>
+            <a href="#plan" class="nav-item" data-index="6">
+              <span class="nav-num">07 //</span> Ejecución
+            </a>
+          </li>
+        </ul>
+      </nav>
+      <div class="sidebar-footer">
+        <p>SYSTEM // ACTIVE</p>
+        <p style="margin-top: 0.2rem; color: rgba(255,255,255,0.06);">REV. 2026 // YM</p>
+      </div>
+    </aside>
+
+    <!-- CONTENEDOR PRINCIPAL DIAPOSITIVAS HORIZONTALES -->
+    <main class="horizontal-deck-container" id="deckContainer">
+
+      <!-- SLIDE 1: WELCOME COVER -->
+      <section id="hero" class="horizontal-slide active-slide">
+        <div class="welcome-grid">
+          <div class="hero-content" data-aos="fade-right">
+            <span class="tech-tag" style="color: var(--text-neon-emerald);">Life Roadmap //</span>
+            <h1 class="welcome-title"><span class="text-gradient" id="heroTitle">Yankarlo Morán</span></h1>
+            <p class="welcome-sub" id="heroSubtitle">Mi Proyecto de Vida</p>
+            <p class="welcome-tagline" id="heroTagline">El éxito no se mide por lo que logras, sino por la persona en la que te conviertes en el proceso.</p>
+            <p style="color: var(--text-dim); margin-top: 1rem;" id="heroIntro"></p>
+          </div>
+          <div class="orbital-art-container" data-aos="zoom-in" data-aos-delay="200">
+            <div class="glowing-orb"></div>
+            <div class="orbit-ring orbit-1"></div>
+            <div class="orbit-ring orbit-2"></div>
+          </div>
+        </div>
+      </section>
+
+      <!-- SLIDE 2: QUIÉN SOY (Circular & Tags) -->
+      <section id="quiensoy" class="horizontal-slide">
+        <div class="slide-header" data-aos="fade-up">
+          <span class="tech-tag">Identity core //</span>
+          <h2>¿Quién Soy?</h2>
+        </div>
+        <div class="sci-profile-grid">
+          <div class="tech-panel" style="text-align: center;" data-aos="fade-right">
+            <div class="sci-avatar-frame" style="margin-bottom: 1.5rem;">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1">
+                <path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"></path>
+                <circle cx="12" cy="7" r="4"></circle>
+              </svg>
+            </div>
+            <h3 class="text-gradient" id="profileName" style="font-size: 1.5rem;">Yankarlo Morán</h3>
+            <p class="welcome-sub" style="font-size: 0.9rem; margin-top: 0.2rem;">Estudiante & Desarrollador</p>
+            <p style="font-size: 0.85rem; color: var(--text-dim); margin-top: 1rem;" id="profileIntro">
+              Apasionado por el aprendizaje continuo, la creación de soluciones interactivas y el crecimiento integral.
+            </p>
+          </div>
+          <div class="tech-panel" data-aos="fade-left" data-aos-delay="200">
+            <h3 style="margin-bottom: 1rem; color: var(--text-neon-cyan);">Valores del Sistema</h3>
+            <div class="tag-cloud-container" id="valuesContainer">
+              <!-- Se inyecta dinámicamente -->
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- SLIDE 3: FODA RADAR SCAN GRID -->
+      <section id="foda" class="horizontal-slide">
+        <div class="slide-header" data-aos="fade-up">
+          <span class="tech-tag">System Diagnosis //</span>
+          <h2>Análisis FODA</h2>
+        </div>
+        <div class="foda-radar-grid" id="fodaGrid">
+          <!-- Inyectado dinámicamente -->
+        </div>
+      </section>
+
+      <!-- SLIDE 4: RUEDA DE LA VITAL (Polar Area Neon) -->
+      <section id="rueda" class="horizontal-slide">
+        <div class="slide-header" data-aos="fade-up">
+          <span class="tech-tag">Matrix Equilibrium //</span>
+          <h2>Rueda de la Vida</h2>
+        </div>
+        <div class="rueda-polar-container">
+          <div class="tech-panel" style="height: 480px; display: flex; align-items: center; justify-content: center;" data-aos="fade-right">
+            <div style="position: relative; width: 100%; height: 100%; max-width: 400px; max-height: 400px;">
+              <canvas id="ruedaChart"></canvas>
+            </div>
+          </div>
+          <div class="tech-panel polar-sliders" data-aos="fade-left" data-aos-delay="200" id="slidersPanel">
+            <!-- Inyectado dinámicamente -->
+          </div>
+        </div>
+      </section>
+
+      <!-- SLIDE 5: TIMELINE METAS -->
+      <section id="timeline" class="horizontal-slide">
+        <div class="slide-header" data-aos="fade-up">
+          <span class="tech-tag">Vector Projection //</span>
+          <h2>Línea Temporal de Metas</h2>
+        </div>
+        <div class="horizontal-timeline-wrap" data-aos="zoom-in">
+          <div class="timeline-horiz-bar"></div>
+          <div class="timeline-horiz-bar-progress" id="timelineProgress"></div>
+          <div class="timeline-horiz-items" id="timelineNodes">
+            <!-- Inyectado dinámicamente -->
+          </div>
+          <div class="tech-panel goal-detail-display" id="goalDetailDisplay">
+            <!-- Se carga dinámicamente al hacer clic en el nodo temporal -->
+          </div>
+        </div>
+      </section>
+
+      <!-- SLIDE 6: PROPÓSITO (Misión/Visión terminal) -->
+      <section id="misionvision" class="horizontal-slide">
+        <div class="slide-header" data-aos="fade-up">
+          <span class="tech-tag">Core Directives //</span>
+          <h2>Propósito de Vida</h2>
+        </div>
+        <div class="sci-mv-grid" id="mvContainer">
+          <!-- Inyectado dinámicamente -->
+        </div>
+      </section>
+
+      <!-- SLIDE 7: HÁBITOS GITHUB STYLE GRID -->
+      <section id="plan" class="horizontal-slide">
+        <div class="slide-header" data-aos="fade-up">
+          <span class="tech-tag">Execution module //</span>
+          <h2>Plan de Acción Diario</h2>
+        </div>
+        <div class="habit-github-panel">
+          <div class="tech-panel github-habits-container" data-aos="fade-right">
+            <h3 style="color: var(--text-neon-emerald); display: flex; align-items: center; gap: 0.6rem; margin-bottom: 0.5rem;">
+              <i data-feather="grid"></i> Matriz de Hábitos
+            </h3>
+            <p style="font-size: 0.8rem; color: var(--text-dim); margin-bottom: 1rem;">Haz clic en los bloques de neón para registrar la constancia semanal de tus hábitos:</p>
+            <div id="githubHabits">
+              <!-- Inyectado dinámicamente -->
+            </div>
+          </div>
+          <div class="tech-panel" data-aos="fade-left" data-aos-delay="200" id="strategiesContainer">
+            <h3 style="color: var(--text-neon-cyan); display: flex; align-items: center; gap: 0.6rem; margin-bottom: 1rem;">
+              <i data-feather="cpu"></i> Protocolos de Enfoque
+            </h3>
+            <!-- Inyectado dinámicamente -->
+          </div>
+        </div>
+      </section>
+
+    </main>
+
+    <!-- SLIDE FOOTER CONTROLS DERECHOS -->
+    <div class="footer-controls">
+      <div class="slide-counter">
+        SLIDE <span class="current-slide-num" id="currentSlideNum">1</span> // 7
+      </div>
+      <button class="ctrl-btn-deck" id="prevBtn" aria-label="Slide anterior (Flecha ←)">
+        <i data-feather="chevron-left"></i>
+      </button>
+      <button class="ctrl-btn-deck" id="nextBtn" aria-label="Siguiente slide (Flecha →)">
+        <i data-feather="chevron-right"></i>
+      </button>
+    </div>
+
+    <!-- CDNs LIBRERÍAS -->
+    <!-- Chart.js para el gráfico polar -->
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <!-- Vanilla Tilt para efecto 3D tilt -->
+    <script src="https://cdn.jsdelivr.net/npm/vanilla-tilt@1.7.2/dist/vanilla-tilt.min.js"></script>
+    <!-- Feather Icons -->
+    <script src="https://cdn.jsdelivr.net/npm/feather-icons/dist/feather.min.js"></script>
+
+    <!-- Lógica de Control Horizontal -->
+    <script type="module" src="/src/main.js"></script>
+  </body>
+</html>
