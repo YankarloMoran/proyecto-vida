@@ -1968,8 +1968,8 @@ input:checked + .slider-round::before {
 
 .lineavida-grid-container {
   display: grid;
-  grid-template-columns: 1.1fr 0.95fr 0.95fr;
-  gap: 2rem;
+  grid-template-columns: repeat(6, 1fr);
+  gap: 1.5rem;
   max-width: 1100px;
   width: 100%;
 }
@@ -1988,10 +1988,33 @@ input:checked + .slider-round::before {
   border-color: var(--border-neon-hover) !important;
 }
 
+.lv-card-1 {
+  grid-column: span 2;
+}
+
+.lv-card-2 {
+  grid-column: span 2;
+}
+
+.lv-card-3 {
+  grid-column: span 2;
+}
+
+.lv-card-4 {
+  grid-column: 2 / span 2;
+}
+
+.lv-card-5 {
+  grid-column: 4 / span 2;
+}
+
 @media (max-width: 1024px) {
   .retos-exigencias-layout, .proposito-layout-wrap, .conexion-layout-wrap, .lineavida-grid-container {
     grid-template-columns: 1fr !important;
     gap: 2rem !important;
+  }
+  .lv-card-1, .lv-card-2, .lv-card-3, .lv-card-4, .lv-card-5 {
+    grid-column: span 1 !important;
   }
 }
 

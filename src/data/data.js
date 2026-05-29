@@ -91,6 +91,22 @@ export const lifeProjectData = {
       titulo: "¿Dónde estoy actualmente?",
       descripcion: "Actualmente estamos cursando nuestro último año de carrera, preparándonos para dar el siguiente paso de nuestra vida, que sería la universidad."
     },
+    habilidades: {
+      titulo: "Habilidades por desarrollar",
+      items: [
+        "Pensamiento Algorítmico y Estructuras de Datos.",
+        "Arquitectura de Software y Sistemas.",
+        "Especialización"
+      ]
+    },
+    metas: {
+      titulo: "Metas",
+      items: [
+        "Corto Plazo: Graduarnos de la carrera de Bachiller en Ciencias y Letras.",
+        "Mediano plazo: Optar por la carrera de Sistemas.",
+        "Largo plazo: Lograr una maestría."
+      ]
+    },
     queNecesito: {
       titulo: "¿Qué necesito estudiar?",
       items: [
@@ -101,13 +117,11 @@ export const lifeProjectData = {
         "Estadística"
       ]
     },
-    habilidades: {
-      titulo: "Habilidades por desarrollar",
+    desafios: {
+      titulo: "Desafíos u obstáculos",
       items: [
-        "Resolución de problemas complejos",
-        "Pensamiento lógico-matemático",
-        "Trabajo en equipo y comunicación asertiva",
-        "Autodisciplina y autoaprendizaje continuo"
+        "La Obsolescencia Tecnológica",
+        "Resistencia al Cambio Organizacional."
       ]
     }
   }

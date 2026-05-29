@@ -182,7 +182,8 @@ function initDataInjection() {
   const lineaVidaContainer = document.getElementById('lineaVidaContainer');
   if (lineaVidaContainer) {
     lineaVidaContainer.innerHTML = `
-      <div class="tech-panel lv-card" data-aos="fade-right" style="padding: 2rem;">
+      <!-- Card 1: ¿Dónde estoy actualmente? -->
+      <div class="tech-panel lv-card lv-card-1" data-aos="fade-right" style="padding: 2rem;">
         <div style="display: flex; align-items: center; gap: 0.8rem; margin-bottom: 1rem; border-bottom: 1px solid rgba(255,255,255,0.06); padding-bottom: 0.8rem;">
           <div style="width: 32px; height: 32px; background: rgba(34, 211, 238, 0.1); border: 1px solid rgba(34, 211, 238, 0.2); display: flex; align-items: center; justify-content: center; border-radius: 50%;">
             <i data-feather="compass" style="color: var(--text-neon-cyan); width: 16px; height: 16px;"></i>
@@ -196,7 +197,42 @@ function initDataInjection() {
         </div>
       </div>
 
-      <div class="tech-panel lv-card" data-aos="fade-up" style="padding: 2rem;">
+      <!-- Card 2: Habilidades por desarrollar -->
+      <div class="tech-panel lv-card lv-card-2" data-aos="fade-up" style="padding: 2rem;">
+        <div style="display: flex; align-items: center; gap: 0.8rem; margin-bottom: 1rem; border-bottom: 1px solid rgba(255,255,255,0.06); padding-bottom: 0.8rem;">
+          <div style="width: 32px; height: 32px; background: rgba(168, 85, 247, 0.1); border: 1px solid rgba(168, 85, 247, 0.2); display: flex; align-items: center; justify-content: center; border-radius: 50%;">
+            <i data-feather="cpu" style="color: var(--text-neon-purple); width: 16px; height: 16px;"></i>
+          </div>
+          <h3 style="color: var(--text-neon-purple); font-family: var(--font-display); font-size: 1.2rem; font-weight: 700; margin: 0;">${data.lineaDeVida.habilidades.titulo}</h3>
+        </div>
+        <ul style="list-style: none; padding-left: 0;">
+          ${data.lineaDeVida.habilidades.items.map(item => `
+            <li style="color: var(--text-dim); font-size: 0.9rem; line-height: 1.6; padding-left: 1.2rem; position: relative; margin-bottom: 0.4rem;">
+              <span style="position: absolute; left: 0; color: var(--text-neon-purple);">⚡</span> ${item}
+            </li>
+          `).join('')}
+        </ul>
+      </div>
+
+      <!-- Card 3: Metas -->
+      <div class="tech-panel lv-card lv-card-3" data-aos="fade-left" style="padding: 2rem;">
+        <div style="display: flex; align-items: center; gap: 0.8rem; margin-bottom: 1rem; border-bottom: 1px solid rgba(255,255,255,0.06); padding-bottom: 0.8rem;">
+          <div style="width: 32px; height: 32px; background: rgba(34, 211, 238, 0.1); border: 1px solid rgba(34, 211, 238, 0.2); display: flex; align-items: center; justify-content: center; border-radius: 50%;">
+            <i data-feather="target" style="color: var(--text-neon-cyan); width: 16px; height: 16px;"></i>
+          </div>
+          <h3 style="color: var(--text-neon-cyan); font-family: var(--font-display); font-size: 1.2rem; font-weight: 700; margin: 0;">${data.lineaDeVida.metas.titulo}</h3>
+        </div>
+        <ul style="list-style: none; padding-left: 0;">
+          ${data.lineaDeVida.metas.items.map(item => `
+            <li style="color: var(--text-dim); font-size: 0.9rem; line-height: 1.6; padding-left: 1.2rem; position: relative; margin-bottom: 0.4rem;">
+              <span style="position: absolute; left: 0; color: var(--text-neon-cyan);">🎯</span> ${item}
+            </li>
+          `).join('')}
+        </ul>
+      </div>
+
+      <!-- Card 4: ¿Qué necesito estudiar? -->
+      <div class="tech-panel lv-card lv-card-4" data-aos="fade-right" style="padding: 2rem;">
         <div style="display: flex; align-items: center; gap: 0.8rem; margin-bottom: 1rem; border-bottom: 1px solid rgba(255,255,255,0.06); padding-bottom: 0.8rem;">
           <div style="width: 32px; height: 32px; background: rgba(16, 185, 129, 0.1); border: 1px solid rgba(16, 185, 129, 0.2); display: flex; align-items: center; justify-content: center; border-radius: 50%;">
             <i data-feather="book-open" style="color: var(--text-neon-emerald); width: 16px; height: 16px;"></i>
@@ -212,17 +248,18 @@ function initDataInjection() {
         </ul>
       </div>
 
-      <div class="tech-panel lv-card" data-aos="fade-left" style="padding: 2rem;">
+      <!-- Card 5: Desafíos u obstáculos -->
+      <div class="tech-panel lv-card lv-card-5" data-aos="fade-left" style="padding: 2rem;">
         <div style="display: flex; align-items: center; gap: 0.8rem; margin-bottom: 1rem; border-bottom: 1px solid rgba(255,255,255,0.06); padding-bottom: 0.8rem;">
-          <div style="width: 32px; height: 32px; background: rgba(168, 85, 247, 0.1); border: 1px solid rgba(168, 85, 247, 0.2); display: flex; align-items: center; justify-content: center; border-radius: 50%;">
-            <i data-feather="cpu" style="color: var(--text-neon-purple); width: 16px; height: 16px;"></i>
+          <div style="width: 32px; height: 32px; background: rgba(239, 68, 68, 0.1); border: 1px solid rgba(239, 68, 68, 0.2); display: flex; align-items: center; justify-content: center; border-radius: 50%;">
+            <i data-feather="alert-triangle" style="color: #ef4444; width: 16px; height: 16px;"></i>
           </div>
-          <h3 style="color: var(--text-neon-purple); font-family: var(--font-display); font-size: 1.2rem; font-weight: 700; margin: 0;">${data.lineaDeVida.habilidades.titulo}</h3>
+          <h3 style="color: #ef4444; font-family: var(--font-display); font-size: 1.2rem; font-weight: 700; margin: 0;">${data.lineaDeVida.desafios.titulo}</h3>
         </div>
         <ul style="list-style: none; padding-left: 0;">
-          ${data.lineaDeVida.habilidades.items.map(item => `
+          ${data.lineaDeVida.desafios.items.map(item => `
             <li style="color: var(--text-dim); font-size: 0.9rem; line-height: 1.6; padding-left: 1.2rem; position: relative; margin-bottom: 0.4rem;">
-              <span style="position: absolute; left: 0; color: var(--text-neon-purple);">⚡</span> ${item}
+              <span style="position: absolute; left: 0; color: #ef4444;">⚠</span> ${item}
             </li>
           `).join('')}
         </ul>
