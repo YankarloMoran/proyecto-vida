@@ -22,7 +22,8 @@ export const lifeProjectData = {
     { name: "Ramirez López, Luis Pedro", node: "NODE_E" },
     { name: "Alvarez Monzon, Hector Adrian", node: "NODE_B" },
     { name: "Paxtor Cordova, Yasmin del Rosario", node: "NODE_D" },
-    { name: "López Rivera, María Jimena", node: "NODE_H" }
+    { name: "López Rivera, María Jimena", node: "NODE_H" },
+    { name: "Pineda Chinchilla, Emily Anghely", node: "NODE_F" }
   ],
   
   profesion: {
@@ -124,5 +125,14 @@ export const lifeProjectData = {
         "Resistencia al Cambio Organizacional."
       ]
     }
+  },
+  proyeccionPersonal: {
+    title: "Proyección Personal",
+    vision: "Convertirnos en profesionales de Ingeniería en Sistemas especializados en la seguridad, robustez e innovación, capaces de afrontar retos complejos con visión global y compromiso ético.",
+    pilares: [
+      { titulo: "Ciberseguridad Colectiva", desc: "Proteger la integridad digital y diseñar arquitecturas inmunes a amenazas.", icon: "shield" },
+      { titulo: "Innovación y Desarrollo", desc: "Construir software escalable y centrado en la usabilidad y la eficiencia.", icon: "code" },
+      { titulo: "Adaptabilidad e Impacto", desc: "Evolucionar con la tecnología para generar valor real en la sociedad.", icon: "zap" }
+    ]
   }
 };

@@ -2,7 +2,7 @@ import { lifeProjectData } from './data/data.js';
 
 // Estados globales de navegación horizontal
 let currentSlideIdx = 0;
-const slides = ['hero', 'quiensoy', 'profesion', 'retos', 'mitos', 'proposito', 'conexion', 'lineavida'];
+const slides = ['hero', 'quiensoy', 'profesion', 'retos', 'mitos', 'proposito', 'conexion', 'lineavida', 'proyeccion'];
 
 document.addEventListener('DOMContentLoaded', () => {
   // Inicialización de componentes e interacciones de la Opción 2
@@ -263,6 +263,29 @@ function initDataInjection() {
             </li>
           `).join('')}
         </ul>
+      </div>
+    `;
+  }
+
+  // Slide 9: Inyectar Proyección Personal
+  const proyeccionContainer = document.getElementById('proyeccionContainer');
+  if (proyeccionContainer) {
+    proyeccionContainer.innerHTML = `
+      <span class="tech-tag" style="color: var(--text-neon-cyan); margin-bottom: 0.5rem; display: inline-block;">[PROJECTION_NODE_ACTIVE]</span>
+      <h3 style="font-family: var(--font-display); font-size: 1.8rem; font-weight: 700; color: var(--text-bright); margin-bottom: 1rem;">${data.proyeccionPersonal.title}</h3>
+      <p style="color: var(--text-dim); font-size: 1.05rem; line-height: 1.6; margin-bottom: 1.5rem;">${data.proyeccionPersonal.vision}</p>
+      <div style="display: grid; grid-template-columns: 1fr; gap: 1rem; margin-top: 1rem;">
+        ${data.proyeccionPersonal.pilares.map((pilar, idx) => `
+          <div class="tech-panel concept-card" style="padding: 1rem; display: flex; align-items: center; gap: 1rem; border: 1px solid rgba(255,255,255,0.05); border-radius: 8px;" data-tilt>
+            <div style="width: 36px; height: 36px; border-radius: 50%; background: rgba(34, 211, 238, 0.1); border: 1px solid rgba(34, 211, 238, 0.2); display: flex; align-items: center; justify-content: center; flex-shrink: 0;">
+              <i data-feather="${pilar.icon}" style="color: var(--text-neon-cyan); width: 16px; height: 16px;"></i>
+            </div>
+            <div>
+              <h4 style="font-family: var(--font-display); font-size: 1rem; color: var(--text-bright); margin: 0 0 0.1rem 0;">${pilar.titulo}</h4>
+              <p style="color: var(--text-dim); font-size: 0.8rem; margin: 0; line-height: 1.3;">${pilar.desc}</p>
+            </div>
+          </div>
+        `).join('')}
       </div>
     `;
   }
