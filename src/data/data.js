@@ -25,6 +25,30 @@ export const lifeProjectData = {
     { name: "López Rivera, María Jimena", node: "NODE_H" }
   ],
   
+  profesion: {
+    title: "Conociendo la Profesión",
+    questions: [
+      {
+        question: "¿Qué hacemos?",
+        answer: "La carrera de Ingeniería en Sistemas consiste en aprender a crear, mejorar y administrar sistemas tecnológicos.",
+        icon: "code",
+        accentClass: "cyan"
+      },
+      {
+        question: "¿Para qué lo hacemos?",
+        answer: "Crea soluciones tecnológicas que faciliten la vida de las personas y mejoren el funcionamiento de empresas.",
+        icon: "target",
+        accentClass: "emerald"
+      },
+      {
+        question: "¿Qué esfuerzo realizamos?",
+        answer: "Estudiar programación y tecnología constantemente.",
+        icon: "activity",
+        accentClass: "purple"
+      }
+    ]
+  },
+
   foda: {
     fortalezas: {
       title: "Fortalezas",

@@ -2,7 +2,7 @@ import { lifeProjectData } from './data/data.js';
 
 // Estados globales de navegación horizontal
 let currentSlideIdx = 0;
-const slides = ['hero', 'quiensoy', 'foda', 'rueda', 'timeline', 'misionvision', 'plan'];
+const slides = ['hero', 'quiensoy', 'profesion', 'foda', 'rueda', 'timeline', 'misionvision', 'plan'];
 
 document.addEventListener('DOMContentLoaded', () => {
   // Inicialización de componentes e interacciones de la Opción 2
@@ -52,6 +52,22 @@ function initDataInjection() {
         </div>
         <h4 class="member-name">${member.name}</h4>
         <span class="member-badge">${member.node}</span>
+      </div>
+    `).join('');
+  }
+
+  // Inyectar Conociendo la Profesión en Slide 3
+  const professionGrid = document.getElementById('professionGrid');
+  if (professionGrid) {
+    professionGrid.innerHTML = data.profesion.questions.map((q, index) => `
+      <div class="tech-panel profession-card ${q.accentClass}" data-tilt data-tilt-max="10">
+        <div class="member-glow"></div>
+        <div class="profession-card-header" style="display: flex; justify-content: space-between; align-items: center; border-bottom: 1px solid rgba(255,255,255,0.06); padding-bottom: 0.5rem; margin-bottom: 0.8rem;">
+          <span class="profession-badge" style="background: rgba(34, 211, 238, 0.1); color: var(--text-neon-cyan); border: 1px solid rgba(34, 211, 238, 0.2); font-family: var(--font-mono); font-size: 0.75rem; padding: 0.2rem 0.6rem; border-radius: 4px;">[QUESTION_NODE_0${index + 1}]</span>
+          <i data-feather="${q.icon}" class="profession-icon" style="color: var(--text-neon-${q.accentClass}); width: 14px; height: 14px;"></i>
+        </div>
+        <h4 style="font-family: var(--font-display); font-size: 1.15rem; font-weight: 700; color: var(--text-neon-${q.accentClass}); margin-bottom: 0.6rem;">${q.question}</h4>
+        <p class="profession-text" style="font-size: 0.85rem; color: var(--text-dim); line-height: 1.5;">${q.answer}</p>
       </div>
     `).join('');
   }

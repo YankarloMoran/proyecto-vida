@@ -19,6 +19,7 @@
   --text-dim: #94a3b8;
   --text-neon-cyan: #22d3ee;
   --text-neon-emerald: #34d399;
+  --text-neon-purple: #c084fc;
   
   --color-cyan: #06b6d4;
   --color-emerald: #10b981;
@@ -313,8 +314,7 @@ body {
    ========================================================================== */
 .horizontal-deck-container {
   display: flex;
-  width: 700vw; /* 7 diapositivas */
-  height: 100vh;
+  width: 800vw; /* 8 diapositivas */
   margin-left: 260px; /* Ancho del sidebar */
   transition: var(--transition-elastic);
   will-change: transform;
@@ -832,6 +832,58 @@ body {
   line-height: 1.7;
   color: var(--text-bright);
   text-align: justify;
+}
+
+/* Slide 3: Conociendo la Profesión */
+.profession-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 2rem;
+  max-width: 1100px;
+}
+
+.profession-card {
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+  min-height: 280px;
+  position: relative;
+  border-top: 3px solid transparent !important;
+}
+
+.profession-card::before {
+  content: "" !important;
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 3px;
+  background: var(--card-border-color);
+  opacity: 0.8;
+}
+
+.profession-card.cyan {
+  --card-border-color: var(--color-cyan);
+}
+.profession-card.emerald {
+  --card-border-color: var(--color-emerald);
+}
+.profession-card.purple {
+  --card-border-color: var(--color-purple);
+}
+
+.profession-card:hover {
+  box-shadow: 0 25px 55px var(--card-glow-color) !important;
+}
+
+.profession-card.cyan:hover {
+  --card-glow-color: rgba(6, 182, 212, 0.12);
+}
+.profession-card.emerald:hover {
+  --card-glow-color: rgba(16, 185, 129, 0.12);
+}
+.profession-card.purple:hover {
+  --card-glow-color: rgba(168, 85, 247, 0.12);
 }
 
 /* Slide 7: Tracker de Hábitos estilo GitHub Contributions */
