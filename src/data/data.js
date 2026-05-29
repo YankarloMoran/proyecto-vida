@@ -111,7 +111,4 @@ export const lifeProjectData = {
       ]
     }
   }
-};cutar pruebas exhaustivas, revisar el código recíprocamente y mantener baja la deuda técnica mediante refactorización activa." }
-    ]
-  }
 };
