@@ -2,16 +2,16 @@ import { lifeProjectData } from './data/data.js';
 
 // Estados globales de navegación horizontal
 let currentSlideIdx = 0;
-const slides = ['hero', 'quiensoy', 'profesion', 'foda', 'rueda', 'timeline', 'misionvision', 'plan'];
+const slides = ['hero', 'quiensoy', 'profesion', 'retos', 'mitos', 'proposito', 'conexion', 'lineavida'];
 
 document.addEventListener('DOMContentLoaded', () => {
   // Inicialización de componentes e interacciones de la Opción 2
   initDataInjection();
   initNeonCursor();
   initParticles();
-  initRuedaPolar();
-  initHorizontalTimeline();
-  initGitHubHabitGrid();
+  // initRuedaPolar(); // Deshabilitado para la nueva estructura
+  // initHorizontalTimeline(); // Deshabilitado para la nueva estructura
+  // initGitHubHabitGrid(); // Deshabilitado para la nueva estructura
   initHorizontalSlideController();
   
   // Cyber Aurora 2.0 premium initializations
@@ -79,57 +79,156 @@ function initDataInjection() {
     document.body.appendChild(scanline);
   }
 
-  // FODA Grid "Radar Scan"
-  const fodaGrid = document.getElementById('fodaGrid');
-  const fodaKeys = ['fortalezas', 'debilidades', 'oportunidades', 'amenazas'];
-  fodaGrid.innerHTML = fodaKeys.map((key, index) => {
-    const section = data.foda[key];
-    return `
-      <div class="tech-panel foda-panel ${key}" data-aos="fade-up" data-aos-delay="${index * 100}">
-        <div class="foda-panel-header">
-          <h3>${section.title}</h3>
-          <span>[SYSTEM_SCAN_${index + 1}]</span>
+  // Slide 4: Inyectar Retos, Exigencias y Realidades
+  const retosGrid = document.getElementById('retosGrid');
+  if (retosGrid) {
+    retosGrid.innerHTML = `
+      <div class="retos-section" style="margin-bottom: 1.5rem;">
+        <h3 style="color: var(--text-neon-cyan); font-family: var(--font-display); font-size: 1.25rem; font-weight: 700; margin-bottom: 0.8rem; display: flex; align-items: center; gap: 0.5rem;">
+          <i data-feather="alert-triangle" style="width: 18px; color: var(--text-neon-cyan);"></i> Retos
+        </h3>
+        <ul style="list-style: none; padding-left: 0.5rem;">
+          ${data.retosExigencias.retos.map(r => `
+            <li style="color: var(--text-dim); font-size: 0.9rem; line-height: 1.6; position: relative; padding-left: 1.2rem; margin-bottom: 0.4rem;">
+              <span style="position: absolute; left: 0; color: var(--text-neon-cyan);">//</span> ${r}
+            </li>
+          `).join('')}
+        </ul>
+      </div>
+      
+      <div class="exigencias-section" style="margin-bottom: 1.5rem;">
+        <h3 style="color: var(--text-neon-purple); font-family: var(--font-display); font-size: 1.25rem; font-weight: 700; margin-bottom: 0.8rem; display: flex; align-items: center; gap: 0.5rem;">
+          <i data-feather="activity" style="width: 18px; color: var(--text-neon-purple);"></i> Exigencias
+        </h3>
+        <p style="color: var(--text-dim); font-size: 0.9rem; line-height: 1.6; padding-left: 0.5rem;">
+          ${data.retosExigencias.exigencias.join(', ')}
+        </p>
+      </div>
+
+      <div class="realidades-section">
+        <h3 style="color: var(--text-neon-emerald); font-family: var(--font-display); font-size: 1.25rem; font-weight: 700; margin-bottom: 0.8rem; display: flex; align-items: center; gap: 0.5rem;">
+          <i data-feather="eye" style="width: 18px; color: var(--text-neon-emerald);"></i> Realidades de ejercerla
+        </h3>
+        <p style="color: var(--text-dim); font-size: 0.9rem; line-height: 1.6; padding-left: 0.5rem; font-style: italic;">
+          "${data.retosExigencias.realidades.join(', ')}"
+        </p>
+      </div>
+    `;
+  }
+
+  // Slide 5: Inyectar Mitos y Verdades (Tabla Estilizada Premium)
+  const mitosContainer = document.getElementById('mitosContainer');
+  if (mitosContainer) {
+    mitosContainer.innerHTML = `
+      <table class="cyber-table" style="width: 100%; border-collapse: collapse; text-align: left;">
+        <thead>
+          <tr style="border-bottom: 2px solid rgba(255,255,255,0.1); background: rgba(34, 211, 238, 0.05);">
+            <th style="padding: 1.2rem; font-family: var(--font-display); color: var(--text-neon-cyan); font-size: 1.1rem; width: 40%;">Mitos</th>
+            <th style="padding: 1.2rem; font-family: var(--font-display); color: var(--text-neon-emerald); font-size: 1.1rem; width: 60%;">Verdades</th>
+          </tr>
+        </thead>
+        <tbody>
+          ${data.mitosVerdades.map((mv, idx) => `
+            <tr style="border-bottom: 1px solid rgba(255,255,255,0.05); background: ${idx % 2 === 0 ? 'rgba(255,255,255,0.01)' : 'transparent'};">
+              <td style="padding: 1.2rem; color: var(--text-dim); font-size: 0.9rem; line-height: 1.5; font-weight: 600; border-right: 1px solid rgba(255,255,255,0.03);">
+                <span style="color: var(--text-neon-cyan); font-family: var(--font-mono); margin-right: 0.5rem;">[M_0${idx+1}]</span> ${mv.mito}
+              </td>
+              <td style="padding: 1.2rem; color: var(--text-bright); font-size: 0.9rem; line-height: 1.5;">
+                <span style="color: var(--text-neon-emerald); font-family: var(--font-mono); margin-right: 0.5rem;">[V_0${idx+1}]</span> ${mv.verdad}
+              </td>
+            </tr>
+          `).join('')}
+        </tbody>
+      </table>
+    `;
+  }
+
+  // Slide 6: Inyectar Propósito y Vocación
+  const propositoContainer = document.getElementById('propositoContainer');
+  if (propositoContainer) {
+    propositoContainer.innerHTML = `
+      <span class="tech-tag" style="color: var(--text-neon-cyan); margin-bottom: 0.5rem; display: inline-block;">[PROPOSITO_NODE_SYS]</span>
+      <h3 style="font-family: var(--font-display); font-size: 1.8rem; font-weight: 700; color: var(--text-bright); margin-bottom: 1rem;">${data.propositoVocacion.title}</h3>
+      <p style="color: var(--text-dim); font-size: 1.05rem; line-height: 1.6; margin-bottom: 1.5rem;">${data.propositoVocacion.tagline}</p>
+      <div style="border-left: 3px solid var(--text-neon-cyan); padding-left: 1.2rem; margin-top: 1rem;">
+        <p style="color: var(--text-dim); font-size: 0.9rem; line-height: 1.5; font-style: italic;">
+          "Nuestra vocación no solo consiste en programar algoritmos óptimos, sino en alinear la informática como una palanca de cambio social, mejorando la calidad de vida humana mediante interfaces y servicios digitales accesibles."
+        </p>
+      </div>
+    `;
+  }
+
+  // Slide 7: Inyectar Conexión con mi Proyecto de Vida
+  const conexionContainer = document.getElementById('conexionContainer');
+  if (conexionContainer) {
+    conexionContainer.innerHTML = `
+      <span class="tech-tag" style="color: var(--text-neon-purple); margin-bottom: 0.5rem; display: inline-block;">[CONNECTION_NODE_CORE]</span>
+      <h3 style="font-family: var(--font-display); font-size: 1.8rem; font-weight: 700; color: var(--text-bright); margin-bottom: 1.5rem;">${data.conexionProyecto.title}</h3>
+      <div style="display: grid; grid-template-columns: repeat(3, 1fr); gap: 1.5rem;">
+        ${data.conexionProyecto.conceptos.map((concept, idx) => `
+          <div class="tech-panel concept-card" style="padding: 1.2rem; text-align: center; border: 1px solid rgba(255,255,255,0.05); border-radius: 8px;" data-tilt>
+            <div style="width: 40px; height: 40px; border-radius: 50%; background: rgba(168, 85, 247, 0.1); border: 1px solid rgba(168, 85, 247, 0.2); display: flex; align-items: center; justify-content: center; margin: 0 auto 0.8rem;">
+              <i data-feather="${idx === 0 ? 'award' : idx === 1 ? 'shield' : 'heart'}" style="color: var(--text-neon-purple); width: 18px; height: 18px;"></i>
+            </div>
+            <h4 style="font-family: var(--font-display); font-size: 1.1rem; color: var(--text-bright); margin-bottom: 0.4rem;">${concept}</h4>
+            <span style="font-family: var(--font-mono); color: var(--text-dim); font-size: 0.75rem;">[CONCEPT_0${idx+1}]</span>
+          </div>
+        `).join('')}
+      </div>
+    `;
+  }
+
+  // Slide 8: Inyectar Plan de Vida (Línea de Tiempo Dinámica)
+  const lineaVidaContainer = document.getElementById('lineaVidaContainer');
+  if (lineaVidaContainer) {
+    lineaVidaContainer.innerHTML = `
+      <div class="tech-panel lv-card" data-aos="fade-right" style="padding: 2rem;">
+        <div style="display: flex; align-items: center; gap: 0.8rem; margin-bottom: 1rem; border-bottom: 1px solid rgba(255,255,255,0.06); padding-bottom: 0.8rem;">
+          <div style="width: 32px; height: 32px; background: rgba(34, 211, 238, 0.1); border: 1px solid rgba(34, 211, 238, 0.2); display: flex; align-items: center; justify-content: center; border-radius: 50%;">
+            <i data-feather="compass" style="color: var(--text-neon-cyan); width: 16px; height: 16px;"></i>
+          </div>
+          <h3 style="color: var(--text-neon-cyan); font-family: var(--font-display); font-size: 1.2rem; font-weight: 700; margin: 0;">${data.lineaDeVida.dondeEstoy.titulo}</h3>
         </div>
-        <ul class="sci-list">
-          ${section.items.map(item => `<li>${item}</li>`).join('')}
+        <p style="color: var(--text-dim); font-size: 0.95rem; line-height: 1.6;">${data.lineaDeVida.dondeEstoy.descripcion}</p>
+        
+        <div style="margin-top: 1.5rem; display: flex; justify-content: center; align-items: center; gap: 2rem; border-top: 1px solid rgba(255,255,255,0.03); padding-top: 1.5rem;">
+          <img src="/linea-de-vida.png" alt="Línea de progresión vital" style="max-height: 140px; border-radius: 10px; border: 1px solid rgba(255,255,255,0.08); box-shadow: 0 8px 30px rgba(0,0,0,0.5);" />
+        </div>
+      </div>
+
+      <div class="tech-panel lv-card" data-aos="fade-up" style="padding: 2rem;">
+        <div style="display: flex; align-items: center; gap: 0.8rem; margin-bottom: 1rem; border-bottom: 1px solid rgba(255,255,255,0.06); padding-bottom: 0.8rem;">
+          <div style="width: 32px; height: 32px; background: rgba(16, 185, 129, 0.1); border: 1px solid rgba(16, 185, 129, 0.2); display: flex; align-items: center; justify-content: center; border-radius: 50%;">
+            <i data-feather="book-open" style="color: var(--text-neon-emerald); width: 16px; height: 16px;"></i>
+          </div>
+          <h3 style="color: var(--text-neon-emerald); font-family: var(--font-display); font-size: 1.2rem; font-weight: 700; margin: 0;">${data.lineaDeVida.queNecesito.titulo}</h3>
+        </div>
+        <ul style="list-style: none; padding-left: 0;">
+          ${data.lineaDeVida.queNecesito.items.map(item => `
+            <li style="color: var(--text-dim); font-size: 0.9rem; line-height: 1.6; padding-left: 1.2rem; position: relative; margin-bottom: 0.4rem;">
+              <span style="position: absolute; left: 0; color: var(--text-neon-emerald);">✔</span> ${item}
+            </li>
+          `).join('')}
+        </ul>
+      </div>
+
+      <div class="tech-panel lv-card" data-aos="fade-left" style="padding: 2rem;">
+        <div style="display: flex; align-items: center; gap: 0.8rem; margin-bottom: 1rem; border-bottom: 1px solid rgba(255,255,255,0.06); padding-bottom: 0.8rem;">
+          <div style="width: 32px; height: 32px; background: rgba(168, 85, 247, 0.1); border: 1px solid rgba(168, 85, 247, 0.2); display: flex; align-items: center; justify-content: center; border-radius: 50%;">
+            <i data-feather="cpu" style="color: var(--text-neon-purple); width: 16px; height: 16px;"></i>
+          </div>
+          <h3 style="color: var(--text-neon-purple); font-family: var(--font-display); font-size: 1.2rem; font-weight: 700; margin: 0;">${data.lineaDeVida.habilidades.titulo}</h3>
+        </div>
+        <ul style="list-style: none; padding-left: 0;">
+          ${data.lineaDeVida.habilidades.items.map(item => `
+            <li style="color: var(--text-dim); font-size: 0.9rem; line-height: 1.6; padding-left: 1.2rem; position: relative; margin-bottom: 0.4rem;">
+              <span style="position: absolute; left: 0; color: var(--text-neon-purple);">⚡</span> ${item}
+            </li>
+          `).join('')}
         </ul>
       </div>
     `;
-  }).join('');
-
-  // Misión y Visión
-  const mvContainer = document.getElementById('mvContainer');
-  mvContainer.innerHTML = `
-    <div class="tech-panel sci-mv-card" data-aos="fade-right">
-      <div class="sci-mv-header">
-        <span class="sci-mv-badge">DIRECTIVA_01 // MISIÓN</span>
-        <i data-feather="cpu" style="color: var(--text-neon-cyan); width: 18px;"></i>
-      </div>
-      <p class="sci-mv-text">${data.misionVision.mision.text}</p>
-    </div>
-    <div class="tech-panel sci-mv-card" data-aos="fade-left" data-aos-delay="200">
-      <div class="sci-mv-header">
-        <span class="sci-mv-badge">DIRECTIVA_02 // VISIÓN</span>
-        <i data-feather="target" style="color: var(--text-neon-emerald); width: 18px;"></i>
-      </div>
-      <p class="sci-mv-text">${data.misionVision.vision.text}</p>
-    </div>
-  `;
-
-  // Plan de Acción - Estrategias
-  const strategiesContainer = document.getElementById('strategiesContainer');
-  strategiesContainer.innerHTML = `
-    <h3 style="color: var(--text-neon-cyan); display: flex; align-items: center; gap: 0.6rem; margin-bottom: 1rem;">
-      <i data-feather="cpu"></i> Protocolos de Enfoque
-    </h3>
-  ` + data.planDeAccion.strategies.map(strat => `
-    <div class="sci-slider-box" style="margin-bottom: 1rem; border: 1px solid rgba(255,255,255,0.03);">
-      <h4 style="font-family: var(--font-display); font-size: 0.95rem; color: var(--text-bright); display: flex; align-items: center; gap: 0.6rem;">
-        <i data-feather="terminal" style="color: var(--text-neon-cyan); width: 16px;"></i> ${strat.title}
-      </h4>
-      <p style="font-size: 0.8rem; color: var(--text-dim); line-height: 1.4; margin-top: 0.3rem;">${strat.desc}</p>
-    </div>
-  `).join('');
+  }
 
   if (window.VanillaTilt) {
     window.VanillaTilt.init(document.querySelectorAll("[data-tilt]"));
