@@ -1039,8 +1039,9 @@ function initMatrixController() {
   function applyFontSize(percentage) {
     if (fontSizeSlider) fontSizeSlider.value = percentage;
     if (fontSizeVal) fontSizeVal.textContent = `${percentage}%`;
-    const baseRem = 1.35 * (percentage / 100);
-    document.documentElement.style.setProperty('--base-font-size', `${baseRem}rem`);
+    // Escalar el font-size del elemento raíz (html) como porcentaje.
+    // Todos los valores en rem son relativos al root, así que TODOS los textos se escalan.
+    document.documentElement.style.fontSize = `${percentage}%`;
     localStorage.setItem('matrix-font-size', percentage);
   }
 
