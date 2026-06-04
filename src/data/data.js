@@ -87,6 +87,54 @@ export const lifeProjectData = {
     conceptos: ["Talentos", "Valores", "Intereses"]
   },
 
+  contribucionImpacto: {
+    title: "Contribución e Impacto",
+    preguntas: [
+      {
+        pregunta: "¿Cómo contribuye a mi crecimiento personal?",
+        respuesta: "Esta carrera me ayuda a desarrollar mis habilidades cognitivas, como resolver problemas orientados a programador y tecnología.",
+        icon: "trending-up",
+        accentClass: "cyan"
+      },
+      {
+        pregunta: "¿Cómo impacta mi carrera a mi familia?",
+        respuesta: "El proyecto me ayudará a brindar los recursos económicos necesarios a mi familia y desarrollar el vínculo familiar mediante viajes y proyectos.",
+        icon: "heart",
+        accentClass: "purple"
+      },
+      {
+        pregunta: "¿Cómo sirve a mi comunidad o al país?",
+        respuesta: "Aportará a nuestra sociedad mediante la implementación de servicios de índole tecnológica y sistémica.",
+        icon: "globe",
+        accentClass: "emerald"
+      }
+    ]
+  },
+
+  impactoSocial: {
+    title: "Impacto Social",
+    preguntas: [
+      {
+        pregunta: "¿Qué responsabilidad social implica esta profesión?",
+        respuesta: "Diseñar e implementar sistemas seguros, accesibles y robustos que protejan la privacidad de los usuarios y reduzcan la brecha digital.",
+        icon: "shield",
+        accentClass: "cyan"
+      },
+      {
+        pregunta: "¿Qué decisiones éticas enfrenta?",
+        respuesta: "El manejo correcto de datos personales, la mitigación de sesgos en algoritmos y el rechazo al desarrollo de software malicioso.",
+        icon: "alert-octagon",
+        accentClass: "purple"
+      },
+      {
+        pregunta: "¿Cómo puede usarse para el bien común?",
+        respuesta: "Creando plataformas libres y seguras para sectores críticos como educación, salud pública y gestión de recursos comunitarios.",
+        icon: "heart",
+        accentClass: "emerald"
+      }
+    ]
+  },
+
   lineaDeVida: {
     dondeEstoy: {
       titulo: "¿Dónde estoy actualmente?",

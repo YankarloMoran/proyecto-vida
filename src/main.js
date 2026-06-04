@@ -2,7 +2,7 @@ import { lifeProjectData } from './data/data.js';
 
 // Estados globales de navegación horizontal
 let currentSlideIdx = 0;
-const slides = ['hero', 'quiensoy', 'profesion', 'retos', 'mitos', 'proposito', 'conexion', 'lineavida', 'proyeccion'];
+const slides = ['hero', 'quiensoy', 'profesion', 'retos', 'mitos', 'proposito', 'conexion', 'contribucion', 'lineavida', 'impactosocial', 'proyeccion'];
 
 document.addEventListener('DOMContentLoaded', () => {
   // Inicialización de componentes e interacciones de la Opción 2
@@ -178,7 +178,39 @@ function initDataInjection() {
     `;
   }
 
-  // Slide 8: Inyectar Plan de Vida (Línea de Tiempo Dinámica)
+  // Slide 8: Inyectar Contribución e Impacto
+  const contribucionGrid = document.getElementById('contribucionGrid');
+  if (contribucionGrid) {
+    contribucionGrid.innerHTML = data.contribucionImpacto.preguntas.map((q, index) => `
+      <div class="tech-panel profession-card ${q.accentClass}" data-tilt data-tilt-max="10">
+        <div class="member-glow"></div>
+        <div class="profession-card-header" style="display: flex; justify-content: space-between; align-items: center; border-bottom: 1px solid rgba(255,255,255,0.06); padding-bottom: 0.5rem; margin-bottom: 0.8rem;">
+          <span class="profession-badge" style="background: rgba(${q.accentClass === 'cyan' ? '34, 211, 238' : q.accentClass === 'purple' ? '168, 85, 247' : '16, 185, 129'}, 0.1); color: var(--text-neon-${q.accentClass}); border: 1px solid rgba(${q.accentClass === 'cyan' ? '34, 211, 238' : q.accentClass === 'purple' ? '168, 85, 247' : '16, 185, 129'}, 0.2); font-family: var(--font-mono); font-size: 0.75rem; padding: 0.2rem 0.6rem; border-radius: 4px;">[IMPACT_NODE_0${index + 1}]</span>
+          <i data-feather="${q.icon}" class="profession-icon" style="color: var(--text-neon-${q.accentClass}); width: 14px; height: 14px;"></i>
+        </div>
+        <h4 style="font-family: var(--font-display); font-size: 1.15rem; font-weight: 700; color: var(--text-neon-${q.accentClass}); margin-bottom: 0.6rem;">${q.pregunta}</h4>
+        <p class="profession-text" style="font-size: 0.85rem; color: var(--text-dim); line-height: 1.5;">${q.respuesta}</p>
+      </div>
+    `).join('');
+  }
+
+  // Slide 10: Inyectar Impacto Social
+  const impactoSocialGrid = document.getElementById('impactoSocialGrid');
+  if (impactoSocialGrid) {
+    impactoSocialGrid.innerHTML = data.impactoSocial.preguntas.map((q, index) => `
+      <div class="tech-panel profession-card ${q.accentClass}" data-tilt data-tilt-max="10">
+        <div class="member-glow"></div>
+        <div class="profession-card-header" style="display: flex; justify-content: space-between; align-items: center; border-bottom: 1px solid rgba(255,255,255,0.06); padding-bottom: 0.5rem; margin-bottom: 0.8rem;">
+          <span class="profession-badge" style="background: rgba(${q.accentClass === 'cyan' ? '34, 211, 238' : q.accentClass === 'purple' ? '168, 85, 247' : '16, 185, 129'}, 0.1); color: var(--text-neon-${q.accentClass}); border: 1px solid rgba(${q.accentClass === 'cyan' ? '34, 211, 238' : q.accentClass === 'purple' ? '168, 85, 247' : '16, 185, 129'}, 0.2); font-family: var(--font-mono); font-size: 0.75rem; padding: 0.2rem 0.6rem; border-radius: 4px;">[SOC_IMPACT_0${index + 1}]</span>
+          <i data-feather="${q.icon}" class="profession-icon" style="color: var(--text-neon-${q.accentClass}); width: 14px; height: 14px;"></i>
+        </div>
+        <h4 style="font-family: var(--font-display); font-size: 1.15rem; font-weight: 700; color: var(--text-neon-${q.accentClass}); margin-bottom: 0.6rem;">${q.pregunta}</h4>
+        <p class="profession-text" style="font-size: 0.85rem; color: var(--text-dim); line-height: 1.5;">${q.respuesta}</p>
+      </div>
+    `).join('');
+  }
+
+  // Slide 10: Inyectar Plan de Vida (Línea de Tiempo Dinámica)
   const lineaVidaContainer = document.getElementById('lineaVidaContainer');
   if (lineaVidaContainer) {
     lineaVidaContainer.innerHTML = `
@@ -998,6 +1030,27 @@ function initMatrixController() {
   setTimeout(() => {
     applyBgMode(savedBg);
   }, 100);
+
+  // Control de Tamaño de Letra (Escala de Texto)
+  const fontSizeSlider = document.getElementById('fontSizeSlider');
+  const fontSizeVal = document.getElementById('fontSizeVal');
+  const savedFontSize = localStorage.getItem('matrix-font-size') || '100';
+
+  function applyFontSize(percentage) {
+    if (fontSizeSlider) fontSizeSlider.value = percentage;
+    if (fontSizeVal) fontSizeVal.textContent = `${percentage}%`;
+    const baseRem = 1.35 * (percentage / 100);
+    document.documentElement.style.setProperty('--base-font-size', `${baseRem}rem`);
+    localStorage.setItem('matrix-font-size', percentage);
+  }
+
+  if (fontSizeSlider) {
+    fontSizeSlider.addEventListener('input', (e) => {
+      applyFontSize(e.target.value);
+    });
+  }
+
+  applyFontSize(savedFontSize);
 }
 
 // --- 8D. CONSOLA DE DIAGNÓSTICOS CIBER-HUD ---

@@ -71,13 +71,23 @@
             </a>
           </li>
           <li>
-            <a href="#lineavida" class="nav-item" data-index="7">
-              <span class="nav-num">08 //</span> Plan de Vida
+            <a href="#contribucion" class="nav-item" data-index="7">
+              <span class="nav-num">08 //</span> Contribución
             </a>
           </li>
           <li>
-            <a href="#proyeccion" class="nav-item" data-index="8">
-              <span class="nav-num">09 //</span> Proyección
+            <a href="#lineavida" class="nav-item" data-index="8">
+              <span class="nav-num">09 //</span> Plan de Vida
+            </a>
+          </li>
+          <li>
+            <a href="#impactosocial" class="nav-item" data-index="9">
+              <span class="nav-num">10 //</span> Impacto Social
+            </a>
+          </li>
+          <li>
+            <a href="#proyeccion" class="nav-item" data-index="10">
+              <span class="nav-num">11 //</span> Proyección
             </a>
           </li>
         </ul>
@@ -225,7 +235,24 @@
         </div>
       </section>
 
-      <!-- SLIDE 8: PLAN DE VIDA / LÍNEA DE TIEMPO -->
+      <!-- SLIDE 8: CONTRIBUCIÓN E IMPACTO -->
+      <section id="contribucion" class="horizontal-slide">
+        <div class="slide-header" data-aos="fade-up">
+          <span class="tech-tag">Social Impact //</span>
+          <h2>Contribución e Impacto</h2>
+        </div>
+        <div class="profession-layout">
+          <div class="profession-hero-image" data-aos="fade-right">
+            <img src="/contribucion-impacto.png" alt="Contribución e Impacto Social" />
+            <div class="profession-image-overlay"></div>
+          </div>
+          <div class="profession-grid" id="contribucionGrid">
+            <!-- Inyectado dinámicamente -->
+          </div>
+        </div>
+      </section>
+
+      <!-- SLIDE 9: PLAN DE VIDA / LÍNEA DE TIEMPO -->
       <section id="lineavida" class="horizontal-slide">
         <div class="slide-header" data-aos="fade-up">
           <span class="tech-tag">Future Path //</span>
@@ -236,7 +263,24 @@
         </div>
       </section>
 
-      <!-- SLIDE 9: PROYECCIÓN PERSONAL -->
+      <!-- SLIDE 10: IMPACTO SOCIAL -->
+      <section id="impactosocial" class="horizontal-slide">
+        <div class="slide-header" data-aos="fade-up">
+          <span class="tech-tag">Social Responsibility //</span>
+          <h2>Impacto Social</h2>
+        </div>
+        <div class="profession-layout">
+          <div class="profession-hero-image" data-aos="fade-right">
+            <img src="/impacto-social.png" alt="Impacto Social" />
+            <div class="profession-image-overlay"></div>
+          </div>
+          <div class="profession-grid" id="impactoSocialGrid">
+            <!-- Inyectado dinámicamente -->
+          </div>
+        </div>
+      </section>
+
+      <!-- SLIDE 11: PROYECCIÓN PERSONAL -->
       <section id="proyeccion" class="horizontal-slide">
         <div class="slide-header" data-aos="fade-up">
           <span class="tech-tag">Future Vision //</span>
@@ -263,7 +307,7 @@
           <!-- Se inyecta dinámicamente -->
         </div>
         <div class="slide-counter">
-          SLIDE <span class="current-slide-num" id="currentSlideNum">1</span> // 9
+          SLIDE <span class="current-slide-num" id="currentSlideNum">1</span> // 11
         </div>
       </div>
     </div>
@@ -327,6 +371,16 @@
               <input type="checkbox" id="sfxToggle" checked>
               <span class="slider-round"></span>
             </label>
+          </div>
+        </div>
+
+        <div class="matrix-group">
+          <div class="slider-control" style="display: flex; flex-direction: column; gap: 0.5rem;">
+            <div style="display: flex; justify-content: space-between; align-items: center;">
+              <span class="matrix-label" style="margin-bottom: 0;">Escala de Texto</span>
+              <span style="color: var(--text-neon-cyan); font-family: var(--font-mono); font-size: 0.75rem;" id="fontSizeVal">100%</span>
+            </div>
+            <input type="range" id="fontSizeSlider" min="80" max="150" value="100" class="sci-range" style="width: 100%; height: 3px; accent-color: var(--color-cyan); background: rgba(255, 255, 255, 0.08); outline: none;">
           </div>
         </div>
 

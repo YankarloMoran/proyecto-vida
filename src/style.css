@@ -36,6 +36,7 @@
   
   --transition-elastic: transform 0.8s cubic-bezier(0.16, 1, 0.3, 1), opacity 0.8s ease;
   --transition-fast: all 0.2s cubic-bezier(0.4, 0, 0.2, 1);
+  --base-font-size: 1.35rem;
 }
 
 /* Reset Global */
@@ -52,6 +53,7 @@ body {
   min-height: 100vh;
   overflow: hidden; /* Evitar scroll nativo en desktop */
   line-height: 1.6;
+  font-size: var(--base-font-size);
 }
 
 /* ==========================================================================
@@ -314,7 +316,7 @@ body {
    ========================================================================== */
 .horizontal-deck-container {
   display: flex;
-  width: 800vw; /* 8 diapositivas */
+  width: 1100vw; /* 11 diapositivas */
   margin-left: 260px; /* Ancho del sidebar */
   transition: var(--transition-elastic);
   will-change: transform;
